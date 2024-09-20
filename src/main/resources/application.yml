@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: school-sports-meet-management 
+    
+  profiles:
+    active: dev
