@@ -1,4 +1,4 @@
-package com.ssm.common.exception;
+package com.ssm.common.handler;
 
 import com.ssm.common.global.Result;
 import lombok.extern.slf4j.Slf4j;

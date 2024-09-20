@@ -3,6 +3,7 @@ package com.ssm.user.controller;
 import com.ssm.common.global.Result;
 import com.ssm.user.entity.User;
 import com.ssm.user.service.UserLoginService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 
 @Validated
 @RestController
+@Tag(name = "User Management", description = "Operations related to user management")
 public class UserLoginController {
 
     private UserLoginService userLoginService;

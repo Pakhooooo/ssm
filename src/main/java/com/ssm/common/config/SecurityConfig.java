@@ -1,6 +1,8 @@
 package com.ssm.common.config;
 
 import com.ssm.common.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -24,12 +27,16 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    @Qualifier("delegatedAuthenticationEntryPoint")
+    private AuthenticationEntryPoint authEntryPoint;
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomUserDetailsService customUserDetailsService;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, CustomUserDetailsService customUserDetailsService) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.customUserDetailsService = customUserDetailsService;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
@@ -37,7 +44,7 @@ public class SecurityConfig {
         // 配置用户详细信息服务和密码编码器
         AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-        
+
         http
                 .csrf().disable() // 禁用 CSRF
                 .cors() // 启用 CORS
@@ -46,11 +53,14 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 无状态会话
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/swagger-ui/**", "/v1/api-docs/**").permitAll() // 允许未授权的路径
+                .antMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll() // 允许未授权的路径
                 .anyRequest().authenticated() // 其他请求需要认证
                 .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(authEntryPoint)
+                .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // 添加 JWT 过滤器
-        
+
         return http.build();
     }
 
@@ -76,5 +86,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // 使用 BCrypt 编码密码
     }
-    
+
 }

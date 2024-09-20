@@ -40,7 +40,7 @@ logging:
 # 配置 Swagger
 springdoc:
   api-docs:
-    path: /v1/api-docs
+    path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
 
