@@ -22,7 +22,7 @@ import tk.mybatis.spring.annotation.MapperScan;
                 )
         ),
         servers = {
-                @Server(url = "http://localhost:8080", description = "Local Server") // 设置服务器信息
+                @Server(url = "http://localhost:8080/api", description = "Local Server") // 设置服务器信息
         },
         tags = {
                 @Tag(name = "User Management", description = "Operations related to user management"), // 设置文档分组
