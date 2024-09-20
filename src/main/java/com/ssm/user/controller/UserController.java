@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class UserController {
     
@@ -18,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/register")
-    public Result<String> saveUser(@RequestBody User user) {
+    public Result<String> saveUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
         return Result.success("用户注册成功");
     }
