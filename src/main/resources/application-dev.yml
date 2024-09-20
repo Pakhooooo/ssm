@@ -1,13 +1,10 @@
 server:
   port: 8080
-  
-  servlet:
-    context-path: /api
 
 spring:
 
   datasource:
-    url: jdbc:mysql://localhost:3306/sports_meet?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/ssm?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,34 +12,34 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 5
   
-    redis:
-      host: localhost
-      port: 6379
-      password: 123456
-      timeout: 2000
-      jedis:
-        pool:
-          max-idle: 8
-          min-idle: 0
-          max-wait: 2000ms
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    timeout: 2000
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-wait: 2000ms
           
-  security:
-    oauth2:
-      client:
-        registration:
-          # OAuth2 客户端配置
-          google:
-            client-id: your-client-id
-            client-secret: your-client-secret
-            scope: profile, email
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            authorization-grant-type: authorization_code
-        provider:
-          google:
-            authorization-uri: https://accounts.google.com/o/oauth2/auth
-            token-uri: https://oauth2.googleapis.com/token
-            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-            user-name-attribute: sub
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          # OAuth2 客户端配置
+#          google:
+#            client-id: your-client-id
+#            client-secret: your-client-secret
+#            scope: profile, email
+#            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+#            authorization-grant-type: authorization_code
+#        provider:
+#          google:
+#            authorization-uri: https://accounts.google.com/o/oauth2/auth
+#            token-uri: https://oauth2.googleapis.com/token
+#            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+#            user-name-attribute: sub
           
           
           
@@ -60,7 +57,7 @@ errors:
 # 配置 Swagger
 springdoc:
   api-docs:
-    path: /v3/api-docs
+    path: /v1/api-docs
   swagger-ui:
     path: /swagger-ui.html
 
@@ -93,5 +90,7 @@ cache:
     time-to-live: 60s
     
 mybatis:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath:/mapper/**/*.xml
   type-aliases-package: com.ssm
+  configuration:
+    map-underscore-to-camel-case: true

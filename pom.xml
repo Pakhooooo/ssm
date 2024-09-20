@@ -107,6 +107,13 @@
             <version>1.6.15</version>
         </dependency>
 
+        <!--通用Mapper4之tk.mybatis-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+
         <!-- Spring Boot 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -18,9 +18,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/register")
-    public Result<User> saveUser(@RequestBody User user) {
+    public Result<String> saveUser(@RequestBody User user) {
         userService.saveUser(user);
-        return Result.success(user, "用户注册成功");
+        return Result.success("用户注册成功");
     }
     
 }

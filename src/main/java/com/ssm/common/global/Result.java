@@ -6,42 +6,37 @@ import org.springframework.http.HttpStatus;
 @Data
 public class Result<T> {
 
-    private boolean success;
-    private T data;
+    private int code;
     private String message;
-    private int status;
+    private T data;
 
-    public Result(boolean success, String message) {
-        this.success = success;
+    public Result(String message) {
         this.message = message;
     }
 
-    public Result(boolean success, String message, int status) {
-        this.success = success;
+    public Result(String message, int code) {
         this.message = message;
-        this.status = status;
+        this.code = code;
     }
 
-    public Result(boolean success, T data, String message, int status) {
-        this.success = success;
+    public Result(T data, String message, int code) {
         this.data = data;
         this.message = message;
-        this.status = status;
+        this.code = code;
     }
 
-    // 静态方法用于成功响应
-    public static <T> Result<T> success(T data) {
-        return new Result<>(true, data, null, HttpStatus.OK.value());
+    public static Result<String> success(String message) {
+        return new Result<>(message);
     }
 
     // 静态方法用于成功响应，带消息
     public static <T> Result<T> success(T data, String message) {
-        return new Result<>(true, data, message, HttpStatus.OK.value());
+        return new Result<>(data, message, HttpStatus.OK.value());
     }
 
     // 静态方法用于失败响应
-    public static <T> Result<T> error(String message, int status) {
-        return new Result<>(false, message, status);
+    public static <T> Result<T> error(String message, int code) {
+        return new Result<>(message, code);
     }
     
 }
