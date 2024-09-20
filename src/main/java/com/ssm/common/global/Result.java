@@ -26,10 +26,10 @@ public class Result<T> {
     }
 
     public static Result<String> success(String message) {
-        return new Result<>(message);
+        return new Result<>(message, HttpStatus.OK.value());
     }
 
-    // 静态方法用于成功响应，带消息
+    // 静态方法用于成功响应
     public static <T> Result<T> success(T data, String message) {
         return new Result<>(data, message, HttpStatus.OK.value());
     }

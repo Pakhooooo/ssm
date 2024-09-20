@@ -1,22 +1,22 @@
 package com.ssm.common.global;
 
-import lombok.Data;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
+@Setter
 public class BaseEntity implements Serializable {
 
-    private Date createdTime;
+    protected Date createdTime;
 
-    private Date updatedTime;
+    protected Date updatedTime;
 
     public Date getCreatedTime() {
-        return new Date(createdTime.getTime());
+        return new Date();
     }
 
     public Date getUpdatedTime() {
-        return new Date(createdTime.getTime());
+        return new Date();
     }
 }

@@ -101,11 +101,11 @@
         </dependency>
 
         <!-- 如果需要 OAuth2 或 Spring Security 集成的 Swagger UI -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-security</artifactId>
             <version>1.6.15</version>
-        </dependency>
+        </dependency>-->
 
         <!--通用Mapper4之tk.mybatis-->
         <dependency>

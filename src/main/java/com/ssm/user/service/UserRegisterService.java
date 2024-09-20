@@ -2,8 +2,8 @@ package com.ssm.user.service;
 
 import com.ssm.user.entity.User;
 
-public interface UserService {
+public interface UserRegisterService {
     
-    void saveUser(User user);
+    int userRegister(User user);
     
 }
