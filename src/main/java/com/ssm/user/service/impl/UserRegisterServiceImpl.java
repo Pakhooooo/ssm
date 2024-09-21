@@ -1,16 +1,23 @@
 package com.ssm.user.service.impl;
 
-import com.ssm.common.util.MD5Util;
 import com.ssm.user.entity.User;
 import com.ssm.user.mapper.UserRegisterMapper;
 import com.ssm.user.service.UserRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserRegisterServiceImpl implements UserRegisterService {
+
+    private PasswordEncoder passwordEncoder;
     
     private UserRegisterMapper userRegisterMapper;
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Autowired
     public void setUserRegisterMapper(UserRegisterMapper userRegisterMapper) {
@@ -29,7 +36,8 @@ public class UserRegisterServiceImpl implements UserRegisterService {
             throw new Exception("手机号码 " + user.getPhoneNumber() + " 已经存在");
         }
         
-        user.setPassword(MD5Util.getMD5(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRegisterMapper.save(user);
     }
+
 }

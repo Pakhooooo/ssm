@@ -16,9 +16,9 @@ public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<Result<String>> handleAuthenticationException(Exception ex) {
+    public ResponseEntity<Result> handleAuthenticationException(Exception ex) {
         log.error(ex.getMessage());
-        Result<String> result = new Result<>("您还没有登录，请登录后重试", HttpStatus.UNAUTHORIZED.value());
+        Result result = new Result("您还没有登录，请登录后重试", HttpStatus.UNAUTHORIZED.value());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
     }
     

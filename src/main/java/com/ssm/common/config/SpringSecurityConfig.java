@@ -1,19 +1,16 @@
 package com.ssm.common.config;
 
-import com.ssm.common.service.CustomUserDetailsService;
+import com.ssm.common.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -25,26 +22,17 @@ import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SpringSecurityConfig {
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
-    @Qualifier("delegatedAuthenticationEntryPoint")
-    private AuthenticationEntryPoint authEntryPoint;
-
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final CustomUserDetailsService customUserDetailsService;
-
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.customUserDetailsService = customUserDetailsService;
+    public void setJwtAuthenticationFilter(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // 配置用户详细信息服务和密码编码器
-        AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-
         http
                 .csrf().disable() // 禁用 CSRF
                 .cors() // 启用 CORS
@@ -55,9 +43,6 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll() // 允许未授权的路径
                 .anyRequest().authenticated() // 其他请求需要认证
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(authEntryPoint)
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // 添加 JWT 过滤器
 

@@ -1,9 +1,9 @@
 package com.ssm.user.service;
 
-import com.ssm.user.entity.User;
+import com.ssm.common.global.Result;
 
 public interface UserLoginService {
-    
-    User userLogin(String username, String password);
+
+    Result login(String username, String password);
     
 }

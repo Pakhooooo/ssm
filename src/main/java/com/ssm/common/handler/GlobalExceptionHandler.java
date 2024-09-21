@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public Result<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+    public Result handleIllegalArgumentException(IllegalArgumentException ex) {
         return Result.error(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
     }
 
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result<String> handleException(Exception ex) {
+    public Result handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
         return Result.error(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public Result handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
 
         // 遍历所有校验失败的字段
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException.class) 
-    public Result<String> handleAccessDeniedException(AccessDeniedException e) {
+    public Result handleAccessDeniedException(AccessDeniedException e) {
         // 返回自定义的提示信息
         log.error(e.getMessage(), e);
         return Result.error("您还未登录，请登录后重试", HttpStatus.FORBIDDEN.value());

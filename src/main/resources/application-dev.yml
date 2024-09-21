@@ -22,20 +22,13 @@ spring:
         max-idle: 8
         min-idle: 0
         max-wait: 2000ms
-          
-          
-          
+    database: 1
+      
 logging:
   level:
     root: INFO
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
-
-# 配置全局异常处理
-#errors:
-#  include-stacktrace: never
-#  whitelabel:
-#    enabled: false
 
 # 配置 Swagger
 springdoc:
@@ -46,22 +39,8 @@ springdoc:
 
 # 配置 JWT
 jwt:
-  secret: your_jwt_secret_key
-  expiration: 86400 # 24小时过期时间（以秒为单位）
-
-# 配置自定义错误页面
-#server:
-#  error:
-#    whitelabel:
-#      enabled: false
-#    include-message: always
-#    include-binding-errors: always
-
-# 配置缓存
-#cache:
-#  type: redis
-#  redis:
-#    time-to-live: 60s
+  secret: daf66e01593f61a15b857cf433aae03a005812b31234e149036bcc8dee755dbb
+  expiration: 86400
     
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml

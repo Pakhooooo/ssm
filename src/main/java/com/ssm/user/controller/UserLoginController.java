@@ -1,22 +1,20 @@
 package com.ssm.user.controller;
 
 import com.ssm.common.global.Result;
-import com.ssm.user.entity.User;
+import com.ssm.user.entity.LoginRequest;
 import com.ssm.user.service.UserLoginService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
 
-@Validated
 @RestController
 @Tag(name = "User Management", description = "Operations related to user management")
 public class UserLoginController {
-
+    
     private UserLoginService userLoginService;
 
     @Autowired
@@ -25,9 +23,7 @@ public class UserLoginController {
     }
 
     @PostMapping(value = "/auth/user/login")
-    public Result<User> userLogin(@RequestParam @NotBlank(message = "用户名不能为空") String userName,
-                                  @RequestParam @NotBlank(message = "密码不能为空") String password) {
-        userLoginService.userLogin(userName, password);
-        return Result.success(null, "登录成功");
+    public Result userLogin(@Valid @RequestBody LoginRequest loginRequest) {
+        return userLoginService.login(loginRequest.getUserName(), loginRequest.getPassword());
     }
 }
