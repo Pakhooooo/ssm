@@ -60,11 +60,6 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Override
     public Result logout(String token) {
-        // 检查 Token 是否为空或已被列入黑名单
-        if (token.isEmpty() || jwtTokenProvider.isTokenBlacklisted(token)) {
-            return Result.error("Token 已失效或无效", HttpStatus.UNAUTHORIZED.value());
-        }
-
         // 从 Token 中提取用户名
         String username = jwtTokenProvider.getUsername(token);
 
@@ -72,7 +67,7 @@ public class UserAuthServiceImpl implements UserAuthService {
         redisUtils.delete("auth:token:" + username);
 
         // 将 JWT Token 加入黑名单
-        long expiration = jwtTokenProvider.getExpirationFromToken(token); // 获取 Token 剩余有效期
+        long expiration = jwtTokenProvider.getExpirationFromToken(token);
         jwtTokenProvider.addToBlacklist(token, expiration);
         
         return Result.success("登出成功");
