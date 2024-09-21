@@ -3,7 +3,6 @@ package com.ssm.common.handler;
 import com.ssm.common.global.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,15 +48,6 @@ public class GlobalExceptionHandler {
 
         // 返回自定义的错误信息
         return Result.error(errors.get("message"), HttpStatus.BAD_REQUEST.value());
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(AccessDeniedException.class) 
-    public Result handleAccessDeniedException(AccessDeniedException e) {
-        // 返回自定义的提示信息
-        log.error(e.getMessage(), e);
-        return Result.error("您还未登录，请登录后重试", HttpStatus.FORBIDDEN.value());
     }
 
 }

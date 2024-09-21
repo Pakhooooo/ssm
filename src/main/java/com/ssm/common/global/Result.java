@@ -9,7 +9,7 @@ public class Result {
 
     private int code;
     private String message;
-    private JSONObject data;
+    private Object data;
 
     public Result(String message, int code) {
         this.message = message;
@@ -17,7 +17,7 @@ public class Result {
         this.data = new JSONObject();
     }
 
-    public Result(JSONObject data, String message, int code) {
+    public Result(Object data, String message, int code) {
         this.data = data;
         this.message = message;
         this.code = code;

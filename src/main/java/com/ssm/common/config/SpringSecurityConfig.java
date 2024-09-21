@@ -2,6 +2,7 @@ package com.ssm.common.config;
 
 import com.ssm.common.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -23,6 +25,10 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
+
+    @Autowired
+    @Qualifier("delegatedAuthenticationEntryPoint")
+    private AuthenticationEntryPoint authEntryPoint;
 
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -43,6 +49,9 @@ public class SpringSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll() // 允许未授权的路径
                 .anyRequest().authenticated() // 其他请求需要认证
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(authEntryPoint)
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // 添加 JWT 过滤器
 
