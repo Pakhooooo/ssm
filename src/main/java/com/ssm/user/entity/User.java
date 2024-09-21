@@ -4,10 +4,12 @@ import com.ssm.common.global.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
+@Table(name = "t_user")
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity implements Serializable {
     

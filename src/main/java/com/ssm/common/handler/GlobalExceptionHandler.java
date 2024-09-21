@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
-        return Result.error("Internal server error " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return Result.error(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     // 捕获 @Valid 注解引发的参数校验异常

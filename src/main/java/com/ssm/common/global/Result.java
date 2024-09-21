@@ -35,8 +35,8 @@ public class Result<T> {
     }
 
     // 静态方法用于失败响应
-    public static <T> Result<T> error(String message, int code) {
-        return new Result<>(message, code);
+    public static Result<String> error(String message, int code) {
+        return new Result<>("", message, code);
     }
     
 }

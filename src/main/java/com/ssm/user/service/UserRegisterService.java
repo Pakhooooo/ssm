@@ -4,6 +4,6 @@ import com.ssm.user.entity.User;
 
 public interface UserRegisterService {
     
-    int userRegister(User user);
+    int userRegister(User user) throws Exception;
     
 }

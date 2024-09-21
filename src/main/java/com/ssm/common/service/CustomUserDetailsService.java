@@ -1,6 +1,8 @@
 package com.ssm.common.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.ssm.user.entity.User;
+import com.ssm.user.mapper.UserLoginMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,13 +12,21 @@ import java.util.Collections;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+    
+    private UserLoginMapper userLoginMapper;
+
+    @Autowired
+    public void setUserLoginMapper(UserLoginMapper userLoginMapper) {
+        this.userLoginMapper = userLoginMapper;
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("user".equals(username)) {
-            return new User("user", "{noop}password", Collections.emptyList());
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user = userLoginMapper.getUserByUserName(userName);
+        if (user != null) {
+            return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), Collections.emptyList());
         } else {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("该账号不存在");
         }
     }
 }
