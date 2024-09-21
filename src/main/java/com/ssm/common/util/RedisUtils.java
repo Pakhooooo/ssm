@@ -9,8 +9,12 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtils {
 
-    @Autowired
     private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    public void setRedisTemplate(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     public void set(String key, String value, long duration) {
         redisTemplate.opsForValue().set(key, value, duration, TimeUnit.SECONDS);
@@ -24,4 +28,7 @@ public class RedisUtils {
         redisTemplate.delete(key);
     }
     
+    public void expire(String key, long duration) {
+        redisTemplate.expire(key, duration, TimeUnit.MINUTES);
+    }
 }

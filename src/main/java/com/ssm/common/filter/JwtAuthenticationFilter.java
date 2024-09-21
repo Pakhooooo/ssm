@@ -1,6 +1,7 @@
 package com.ssm.common.filter;
 
 import com.ssm.common.util.JwtTokenProvider;
+import com.ssm.common.util.RedisUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +19,15 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    
+    private final RedisUtils redisUtils;
 
     private final JwtTokenProvider jwtTokenProvider;
 
     private final UserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
+    public JwtAuthenticationFilter(RedisUtils redisUtils, JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
+        this.redisUtils = redisUtils;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
     }
@@ -37,8 +41,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = getTokenFromRequest(request);
 
         // 校验 token
-        if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
-
+        if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token) && !jwtTokenProvider.isTokenBlacklisted(token)) {
+            
             // 从 token 获取 username
             String username = jwtTokenProvider.getUsername(token);
 
@@ -54,6 +58,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+            // 验证通过，重置 Redis 中的有效期
+            String tokenKey = "auth:token:" + username;
+            redisUtils.expire(tokenKey, 10);
         }
 
         filterChain.doFilter(request, response);

@@ -26,7 +26,6 @@ spring:
       
 logging:
   level:
-    root: INFO
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
 
@@ -40,7 +39,8 @@ springdoc:
 # 配置 JWT
 jwt:
   secret: daf66e01593f61a15b857cf433aae03a005812b31234e149036bcc8dee755dbb
-  expiration: 86400
+  # 毫秒 生成的 JWT 一天有效期
+  expiration: 86400000
     
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml

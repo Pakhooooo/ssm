@@ -1,7 +1,7 @@
 package com.ssm.common.service;
 
 import com.ssm.user.entity.User;
-import com.ssm.user.mapper.UserLoginMapper;
+import com.ssm.user.mapper.UserAuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +13,16 @@ import java.util.Collections;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     
-    private UserLoginMapper userLoginMapper;
+    private UserAuthMapper userAuthMapper;
 
     @Autowired
-    public void setUserLoginMapper(UserLoginMapper userLoginMapper) {
-        this.userLoginMapper = userLoginMapper;
+    public void setUserAuthMapper(UserAuthMapper userAuthMapper) {
+        this.userAuthMapper = userAuthMapper;
     }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userLoginMapper.getUserByUserName(userName);
+        User user = userAuthMapper.getUserByUserName(userName);
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), Collections.emptyList());
         } else {
