@@ -4,6 +4,8 @@ import lombok.Data;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 
+import java.util.Objects;
+
 @Data
 public class Result {
 
@@ -28,7 +30,10 @@ public class Result {
     }
 
     // 静态方法用于成功响应
-    public static Result success(JSONObject data, String message) {
+    public static Result success(Object data, String message) {
+        if (Objects.isNull(data)) {
+            data = new JSONObject();
+        }
         return new Result(data, message, HttpStatus.OK.value());
     }
 

@@ -5,10 +5,7 @@ import com.ssm.user.entity.LoginRequest;
 import com.ssm.user.service.UserAuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -33,5 +30,11 @@ public class UserAuthController {
         // 从请求头中获取 JWT Token
         String token = authorizationHeader.replace("Bearer ", "");
         return userAuthService.logout(token);
+    }
+    
+    @GetMapping(value = "/user/refresh/token")
+    public Result userRefreshToken(@RequestHeader("Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        return userAuthService.refreshToken(token);
     }
 }

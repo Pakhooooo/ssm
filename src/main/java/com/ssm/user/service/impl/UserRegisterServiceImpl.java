@@ -37,7 +37,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         }
         
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRegisterMapper.save(user);
+        return userRegisterMapper.insert(user);
     }
 
 }

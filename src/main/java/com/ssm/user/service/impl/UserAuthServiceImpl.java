@@ -72,4 +72,11 @@ public class UserAuthServiceImpl implements UserAuthService {
         
         return Result.success("登出成功");
     }
+
+    @Override
+    public Result refreshToken(String token) {
+        String username = jwtTokenProvider.getUsername(token);
+        String newToken = redisUtils.get("auth:token:" + username);
+        return Result.success(newToken, "Token refresh success");
+    }
 }

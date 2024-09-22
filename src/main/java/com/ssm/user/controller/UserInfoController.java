@@ -3,6 +3,7 @@ package com.ssm.user.controller;
 import com.ssm.common.global.Result;
 import com.ssm.user.dto.UserDTO;
 import com.ssm.user.service.UserInfoService;
+import com.ssm.user.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,8 +29,8 @@ public class UserInfoController {
     public Result getUserInfo(
             @Parameter(description = "用户ID", example = "1", required = true)
             @PathVariable @NotNull(message = "用户ID不能为空") int userId) {
-        
-        return Result.success(null, "用户信息查询成功");
+        UserVO userVO = userInfoService.getUserInfoById(userId);
+        return Result.success(userVO, "用户信息查询成功");
     }
     
     @PutMapping(value = "/user/password/change")

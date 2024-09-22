@@ -7,4 +7,6 @@ public interface UserAuthService {
     Result login(String username, String password);
     
     Result logout(String token);
+    
+    Result refreshToken(String token);
 }
