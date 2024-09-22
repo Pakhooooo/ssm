@@ -49,7 +49,7 @@ public class UserAuthServiceImpl implements UserAuthService {
             jsonObject.put("token", jwtToken);
 
             String redisKey = "auth:token:" + username;
-            redisUtils.set(redisKey, jsonObject.toString(), 300);
+            redisUtils.set(redisKey, jsonObject.toString(), 1800);
             
             return Result.success(jsonObject, "登录成功");
             

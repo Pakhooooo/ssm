@@ -12,5 +12,7 @@ public class UserVO {
     private String realName;
     
     private String phoneNumber;
+    
+    private String role;
 
 }

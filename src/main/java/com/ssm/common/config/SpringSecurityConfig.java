@@ -45,7 +45,7 @@ public class SpringSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 无状态会话
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll() // 允许未授权的路径
+                .antMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/actuator/**").permitAll() // 允许未授权的路径
                 .anyRequest().authenticated() // 其他请求需要认证
                 .and()
                 .exceptionHandling()

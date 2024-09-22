@@ -1,18 +1,17 @@
 package com.ssm.user.entity;
 
 import com.ssm.common.global.BaseEntity;
+import com.ssm.user.vo.UserVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @Table(name = "t_user")
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity {
 
     private Integer id;
     
@@ -29,12 +28,21 @@ public class User extends BaseEntity implements Serializable {
     private String phoneNumber;
 
     public User() {
-        super.createTime = new Date();
-        super.updateTime = new Date();
+        
     }
 
     public User(Integer id, Integer delStatus) {
         this.id = id;
         super.delStatus = delStatus;
+    }
+    
+    public UserVO getUserVO() {
+        UserVO userVO = new UserVO();
+        userVO.setUserId(this.getId());
+        userVO.setUserName(this.getUserName());
+        userVO.setRealName(this.getRealName());
+        userVO.setPhoneNumber(this.getPhoneNumber());
+        
+        return userVO;
     }
 }

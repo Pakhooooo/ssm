@@ -40,11 +40,17 @@ springdoc:
 jwt:
   secret: daf66e01593f61a15b857cf433aae03a005812b31234e149036bcc8dee755dbb
   # 毫秒 
-  expiration: 300000
+  expiration: 1800000
     
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
-  type-aliases-package: com.ssm.**.entity
+  type-aliases-package: com.ssm.**.entity, com.ssm.**.vo
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

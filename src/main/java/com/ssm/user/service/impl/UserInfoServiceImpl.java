@@ -23,12 +23,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         if (user == null) {
             return null;
         }
-        
-        UserVO userVO = new UserVO();
-        userVO.setUserId(user.getId());
-        userVO.setUserName(user.getUserName());
-        userVO.setRealName(user.getRealName());
-        userVO.setPhoneNumber(user.getPhoneNumber());
-        return userVO;
+
+        return user.getUserVO();
+    }
+
+    @Override
+    public UserVO getUserByUserName(String userName) {
+        return userInfoMapper.getUserByUserName(userName);
     }
 }
