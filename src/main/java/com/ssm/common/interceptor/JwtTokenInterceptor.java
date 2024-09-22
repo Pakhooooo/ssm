@@ -86,9 +86,6 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 
                 // 把新的 Token 放 Redis
                 redisUtils.set(redisKey, jsonObject.toString(), 1800);
-                
-                // 在响应头中返回新的 Token
-                response.setHeader("Authorization", "Bearer " + newToken);
             }
         }
         return true;

@@ -40,8 +40,7 @@ public class UserInterceptor implements HandlerInterceptor {
                 } else if (userVO.getUserId().toString().equals(userId)) {
                     return true; // 允许查询自己的信息
                 } else {
-                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "无权限访问");
-                    return false; // 拒绝访问
+                    throw new RuntimeException("无权限访问");
                 }
             }
         }
