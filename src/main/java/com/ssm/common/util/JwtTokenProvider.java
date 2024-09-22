@@ -21,10 +21,10 @@ public class JwtTokenProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
     @Value("${jwt.secret}")
-    private String secret;
+    private String jwtSecret;
 
     @Value("${jwt.expiration}")
-    private long expiration;
+    private long jwtExpiration;
 
     private StringRedisTemplate redisTemplate;
 
@@ -38,7 +38,7 @@ public class JwtTokenProvider {
         String username = authentication.getName();
 
         Date currentDate = new Date();
-        Date expireDate = new Date(currentDate.getTime() + expiration);
+        Date expireDate = new Date(currentDate.getTime() + jwtExpiration);
 
         return Jwts.builder()
                 .setSubject(username)
@@ -49,9 +49,7 @@ public class JwtTokenProvider {
     }
 
     private Key key(){
-        return Keys.hmacShaKeyFor(
-                Decoders.BASE64.decode(secret)
-        );
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     // 从 Jwt token 获取用户名
