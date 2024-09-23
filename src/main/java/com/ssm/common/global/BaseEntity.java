@@ -13,5 +13,4 @@ public class BaseEntity implements Serializable {
     protected Date updateTime;
 
     protected Integer delStatus;
-
 }

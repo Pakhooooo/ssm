@@ -1,7 +1,6 @@
 package com.ssm.user.entity;
 
 import com.ssm.common.global.BaseEntity;
-import com.ssm.user.vo.UserVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -37,25 +36,5 @@ public class User extends BaseEntity {
     
     @NotBlank(message = "手机号码不能为空")
     private String phoneNumber;
-
-    public User() {
-        
-    }
-
-    public User(Integer id, Integer delStatus) {
-        this.id = id;
-        super.delStatus = delStatus;
-    }
     
-    public UserVO getUserVO() {
-        UserVO userVO = new UserVO();
-        userVO.setUserId(this.getId());
-        userVO.setUserName(this.getUserName());
-        userVO.setAge(this.getAge());
-        userVO.setSex(this.getSex());
-        userVO.setRealName(this.getRealName());
-        userVO.setPhoneNumber(this.getPhoneNumber());
-        
-        return userVO;
-    }
 }

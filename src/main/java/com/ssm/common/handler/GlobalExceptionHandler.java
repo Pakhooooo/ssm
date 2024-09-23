@@ -72,7 +72,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(NotOwnerException.class)
     public ResponseEntity<Result> handleNotOwnerException(Exception ex) {
-        log.error(ex.getMessage());
         Result result = new Result("您没有权限进行操作", HttpStatus.FORBIDDEN.value());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(result);
     }

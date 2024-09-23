@@ -1,24 +1,24 @@
 package com.ssm.common.interceptor;
 
 import com.ssm.common.util.RedisUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.acl.NotOwnerException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UserInterceptor implements HandlerInterceptor {
-
+    
     private RedisUtils redisUtils;
 
     @Autowired
@@ -38,17 +38,14 @@ public class UserInterceptor implements HandlerInterceptor {
         }
 
         String currentUsername = authentication.getName();
-        JSONObject userObject = (JSONObject) redisUtils.get("user:info:" + currentUsername);
-        if (userObject == null) {
-            throw new UsernameNotFoundException("用户信息未找到");
-        }
+        JSONObject userObject = new JSONObject(redisUtils.get("user:info:" + currentUsername));
 
         // 获取用户角色
         List<String> roles = getUserRoles(userObject);
 
         // 检查是否为管理员或访问自己的信息
         if (isAdmin(roles) || isOwner(userObject, userId)) {
-            return true; // 允许访问
+            return true;
         }
 
         throw new NotOwnerException();
@@ -71,11 +68,16 @@ public class UserInterceptor implements HandlerInterceptor {
      * 从 JSONObject 中提取用户角色列表。
      */
     private List<String> getUserRoles(JSONObject userObject) {
-        return userObject.optJSONArray("roles")
-                .toList()
-                .stream()
-                .map(role -> ((JSONObject) role).getString("roleName"))
-                .collect(Collectors.toList());
+        List<String> roles = new ArrayList<>();
+        JSONArray rolesArray = userObject.optJSONArray("roles");
+
+        for (int i = 0; i < rolesArray.length(); i++) {
+            JSONObject roleObject = rolesArray.optJSONObject(i);
+            String roleName = roleObject.optString("roleName");
+            roles.add(roleName);
+        }
+        
+        return roles;
     }
 
     /**
@@ -89,7 +91,7 @@ public class UserInterceptor implements HandlerInterceptor {
      * 检查当前用户是否为资源所有者。
      */
     private boolean isOwner(JSONObject userObject, String userId) {
-        return userObject.optString("userId").equals(userId);
+        return userObject.optString("id").equals(userId);
     }
 
 }

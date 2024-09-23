@@ -23,17 +23,13 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    private RedisUtils redisUtils;
+    private final RedisUtils redisUtils;
 
-    private TokenCacheService tokenCacheService;
-    
+    private final TokenCacheService tokenCacheService;
+
     @Autowired
-    public void setRedisUtils(RedisUtils redisUtils) {
+    public JwtTokenInterceptor(RedisUtils redisUtils, TokenCacheService tokenCacheService) {
         this.redisUtils = redisUtils;
-    }
-
-    @Autowired
-    public void setTokenCacheService(TokenCacheService tokenCacheService) {
         this.tokenCacheService = tokenCacheService;
     }
 

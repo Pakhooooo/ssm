@@ -1,11 +1,10 @@
 package com.ssm.user.mapper;
 
-import com.ssm.user.entity.User;
 import com.ssm.user.vo.UserVO;
-import tk.mybatis.mapper.common.Mapper;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface UserInfoMapper extends Mapper<User> {
-
-    UserVO getUserByUserName(String userName);
+@Mapper
+public interface UserInfoMapper {
     
+    UserVO getUserInfoById(int userId);
 }

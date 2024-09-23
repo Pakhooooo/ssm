@@ -6,6 +6,4 @@ public interface UserInfoService {
     
     UserVO getUserInfoById(int userId);
     
-    UserVO getUserByUserName(String userName);
-    
 }

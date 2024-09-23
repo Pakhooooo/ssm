@@ -1,20 +1,16 @@
 package com.ssm.common.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class RedisUtils {
 
-    private StringRedisTemplate redisTemplate;
-
-    @Autowired
-    public void setStringRedisTemplate(StringRedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
+    @Resource
+    private RedisTemplate<String, String> redisTemplate;
 
     public void set(String key, String value, long duration) {
         redisTemplate.opsForValue().set(key, value, duration, TimeUnit.SECONDS);
@@ -29,6 +25,6 @@ public class RedisUtils {
     }
     
     public void expire(String key, long duration) {
-        redisTemplate.expire(key, duration, TimeUnit.MINUTES);
+        redisTemplate.expire(key, duration, TimeUnit.SECONDS);
     }
 }
