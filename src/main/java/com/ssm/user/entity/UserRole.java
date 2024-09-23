@@ -17,4 +17,6 @@ public class UserRole extends BaseEntity {
     
     private Integer roleId;
     
+    private String roleName;
+    
 }

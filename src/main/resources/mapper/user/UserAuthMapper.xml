@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.user.mapper.UserAuthMapper">
 
-    <select id="getUserByUserName" parameterType="java.lang.String" resultType="User">
-        SELECT user_name AS userName, password
+    <select id="findUserByUserName" parameterType="java.lang.String" resultType="User">
+        SELECT id, user_name AS userName, password, age, sex, real_name AS realName, phone_number AS phoneNumber
         FROM t_user
         WHERE user_name = #{userName}
           AND del_status = 0

@@ -12,7 +12,7 @@ public class RedisUtils {
     private StringRedisTemplate redisTemplate;
 
     @Autowired
-    public void setRedisTemplate(StringRedisTemplate redisTemplate) {
+    public void setStringRedisTemplate(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

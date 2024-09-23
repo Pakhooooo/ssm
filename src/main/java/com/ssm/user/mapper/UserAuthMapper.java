@@ -5,6 +5,6 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface UserAuthMapper extends Mapper<User> {
     
-    User getUserByUserName(String userName);
+    User findUserByUserName(String userName);
     
 }
