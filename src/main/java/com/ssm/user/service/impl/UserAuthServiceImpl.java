@@ -70,6 +70,8 @@ public class UserAuthServiceImpl implements UserAuthService {
         long expiration = jwtTokenProvider.getExpirationFromToken(token);
         jwtTokenProvider.addToBlacklist(token, expiration);
         
+        redisUtils.delete("user:info:" + username);
+        
         return Result.success("登出成功");
     }
 

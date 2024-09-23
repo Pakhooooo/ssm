@@ -68,6 +68,8 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 
                 // 把新的 Token 放 Redis
                 redisUtils.set(redisKey, jsonObject.toString(), 1800);
+                
+                redisUtils.expire("user:info:" + username, 1800);
             }
         }
         return true;
