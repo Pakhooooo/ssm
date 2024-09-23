@@ -1,14 +1,18 @@
 package com.ssm.common.handler;
 
+import com.ssm.common.exception.AuthFailureException;
 import com.ssm.common.global.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.security.acl.NotOwnerException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +52,29 @@ public class GlobalExceptionHandler {
 
         // 返回自定义的错误信息
         return Result.error(errors.get("message"), HttpStatus.BAD_REQUEST.value());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<Result> handleAuthenticationException(Exception ex) {
+        log.error(ex.getMessage());
+        Result result = new Result("您还没有登录，请登录后重试", HttpStatus.UNAUTHORIZED.value());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AuthFailureException.class)
+    public Result handleAuthFailureException(Exception ex) {
+        return Result.error(ex.getMessage(), HttpStatus.UNAUTHORIZED.value());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(NotOwnerException.class)
+    public ResponseEntity<Result> handleNotOwnerException(Exception ex) {
+        log.error(ex.getMessage());
+        Result result = new Result("您没有权限进行操作", HttpStatus.FORBIDDEN.value());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(result);
     }
 
 }

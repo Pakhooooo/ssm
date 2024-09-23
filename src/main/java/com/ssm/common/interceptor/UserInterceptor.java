@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.acl.NotOwnerException;
 
 @Component
 public class UserInterceptor implements HandlerInterceptor {
@@ -40,7 +41,7 @@ public class UserInterceptor implements HandlerInterceptor {
                 } else if (userVO.getUserId().toString().equals(userId)) {
                     return true; // 允许查询自己的信息
                 } else {
-                    throw new RuntimeException("无权限访问");
+                    throw new NotOwnerException();
                 }
             }
         }

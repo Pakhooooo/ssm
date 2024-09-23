@@ -1,12 +1,12 @@
 package com.ssm.user.service.impl;
 
+import com.ssm.common.exception.AuthFailureException;
 import com.ssm.common.global.Result;
 import com.ssm.common.util.JwtTokenProvider;
 import com.ssm.common.util.RedisUtils;
 import com.ssm.user.service.UserAuthService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,7 +54,7 @@ public class UserAuthServiceImpl implements UserAuthService {
             return Result.success(jsonObject, "登录成功");
             
         } catch (AuthenticationException e) {
-            return Result.error("用户名或密码错误", HttpStatus.UNAUTHORIZED.value());
+            throw new AuthFailureException("用户名或密码错误");
         }
     }
 

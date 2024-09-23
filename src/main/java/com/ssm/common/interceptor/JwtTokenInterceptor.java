@@ -1,7 +1,6 @@
 package com.ssm.common.interceptor;
 
 import com.ssm.common.service.TokenCacheService;
-import com.ssm.common.util.JwtTokenProvider;
 import com.ssm.common.util.RedisUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -26,18 +25,11 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 
     private RedisUtils redisUtils;
 
-    private JwtTokenProvider jwtTokenProvider;
-    
     private TokenCacheService tokenCacheService;
     
     @Autowired
     public void setRedisUtils(RedisUtils redisUtils) {
         this.redisUtils = redisUtils;
-    }
-
-    @Autowired
-    public void setJwtTokenProvider(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Autowired
@@ -74,12 +66,6 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
                 String newToken = generateNewToken(username);
 
                 String redisKey = "auth:token:" + username;
-                
-                // 删除将要过期的 Token
-                redisUtils.delete(redisKey);
-
-                // 将旧的 JWT Token 加入黑名单
-                jwtTokenProvider.addToBlacklist(token, remainingTime);
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("token", newToken);

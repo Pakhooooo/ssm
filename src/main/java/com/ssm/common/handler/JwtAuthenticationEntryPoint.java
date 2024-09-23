@@ -10,8 +10,8 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component("delegatedAuthenticationEntryPoint")
-public class DelegatedAuthenticationEntryPoint implements AuthenticationEntryPoint {
+@Component()
+public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Autowired
     @Qualifier("handlerExceptionResolver")

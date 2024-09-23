@@ -2,7 +2,6 @@ package com.ssm.common.config;
 
 import com.ssm.common.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,11 +23,14 @@ import java.util.Collections;
 @Configuration
 public class SpringSecurityConfig {
 
-    @Autowired
-    @Qualifier("delegatedAuthenticationEntryPoint")
     private AuthenticationEntryPoint authEntryPoint;
 
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    public void setAuthEntryPoint(AuthenticationEntryPoint authEntryPoint) {
+        this.authEntryPoint = authEntryPoint;
+    }
 
     @Autowired
     public void setJwtAuthenticationFilter(JwtAuthenticationFilter jwtAuthenticationFilter) {
