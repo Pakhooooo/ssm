@@ -6,6 +6,8 @@ import com.ssm.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     
@@ -19,5 +21,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserVO getUserInfoById(int userId) {
         return userInfoMapper.getUserInfoById(userId);
+    }
+
+    @Override
+    public List<UserVO> getUserList() {
+        return userInfoMapper.getUserList();
+    }
+
+    @Override
+    public void deleteUserInfoById(int userId) {
+        userInfoMapper.deleteUserInfoById(userId);
     }
 }

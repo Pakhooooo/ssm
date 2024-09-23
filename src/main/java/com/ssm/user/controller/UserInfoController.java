@@ -2,6 +2,7 @@ package com.ssm.user.controller;
 
 import com.ssm.common.global.Result;
 import com.ssm.user.dto.UserDTO;
+import com.ssm.user.dto.UserPasswordDTO;
 import com.ssm.user.service.UserInfoService;
 import com.ssm.user.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,9 +34,9 @@ public class UserInfoController {
         return Result.success(userVO, "用户信息查询成功");
     }
 
-    @PutMapping(value = "/user/{userId}/password")
-    public Result changePassword(@PathVariable @NotNull(message = "用户ID不能为空") int userId, @RequestBody UserDTO userDTO) {
-
+    @PutMapping(value = "/user/change/password")
+    public Result changePassword(@RequestBody UserPasswordDTO userPasswordDTO) {
+        
         return Result.success(new JSONObject(), "密码修改成功");
     }
 
@@ -47,14 +48,13 @@ public class UserInfoController {
 
     @DeleteMapping("/user/{userId}")
     public Result deleteUser(@PathVariable @NotNull(message = "用户ID不能为空") int userId) {
-
+        userInfoService.deleteUserInfoById(userId);
         return Result.success(new JSONObject(), "删除用户成功");
     }
 
     @GetMapping(value = "/user/list")
     public Result getUserList() {
-
-        return Result.success(new JSONObject(), "用户列表查询成功");
+        return Result.success(userInfoService.getUserList(), "用户列表查询成功");
     }
 
 }

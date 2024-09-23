@@ -8,4 +8,14 @@
         WHERE id = #{userId} AND del_status = 0
     </select>
 
+    <select id="getUserList" resultType="UserVO">
+        SELECT id AS userId, user_name AS userName, age, sex, real_name AS realName, phone_number AS phoneNumber
+        FROM t_user
+        WHERE del_status = 0
+    </select>
+    
+    <update id="deleteUserInfoById" parameterType="java.lang.Integer">
+        UPDATE t_user SET del_status = 1 WHERE id = #{userId}
+    </update>
+    
 </mapper>

@@ -1,9 +1,10 @@
 package com.ssm.user.mapper;
 
 import com.ssm.user.entity.User;
-import tk.mybatis.mapper.common.Mapper;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface UserAuthMapper extends Mapper<User> {
+@Mapper
+public interface UserAuthMapper {
     
     User findUserByUserName(String userName);
     

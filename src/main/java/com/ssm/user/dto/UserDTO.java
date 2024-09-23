@@ -5,9 +5,11 @@ import lombok.Data;
 @Data
 public class UserDTO {
     
-    private String userId;
+    private Integer age;
     
-    private String password;
+    private String sex;
+    
+    private String realName;
     
     private String phoneNumber;
     
