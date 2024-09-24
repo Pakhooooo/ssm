@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
-@EnableMethodSecurity()
+@EnableMethodSecurity
 public class SpringSecurityConfig {
 
     private AuthenticationEntryPoint authEntryPoint;
