@@ -37,6 +37,10 @@ public class Result {
         return new Result(data, message, HttpStatus.OK.value());
     }
 
+    public static Result error(String message) {
+        return new Result(new JSONObject(), message, HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
+
     // 静态方法用于失败响应
     public static Result error(String message, int code) {
         return new Result(new JSONObject(), message, code);

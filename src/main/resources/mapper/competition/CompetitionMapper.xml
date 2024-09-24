@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.competition.mapper.CompetitionMapper">
+    
+    <select id="getCompetition" parameterType="java.lang.Integer" resultType="CompetitionVO">
+        SELECT 
+            id, competition_name AS competitionName, competition_date AS competitionDate,
+            competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,
+            competition_description AS competitionDescription
+        FROM t_competition
+        WHERE id = #{competitionId} AND del_status = 0
+    </select>
+
+    <select id="getCompetitions" resultType="CompetitionVO">
+        SELECT
+            id, competition_name AS competitionName, competition_date AS competitionDate,
+            competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,
+            competition_description AS competitionDescription
+        FROM t_competition
+        WHERE del_status = 0
+    </select>
+
+</mapper>
