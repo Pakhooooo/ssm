@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -40,7 +41,8 @@ public class UserInfoController {
         return Result.success(new JSONObject(), "密码修改成功");
     }
 
-    @PutMapping(value = "/user/{userId}/information")
+    @PutMapping(value = "/user/{userId}")
+    @PreAuthorize("hasRole('ADMIN') or #userId == authentication.principal.id")
     public Result changeInformation(@PathVariable @NotNull(message = "用户ID不能为空") int userId, @RequestBody UserDTO userDTO) {
         
         return Result.success(new JSONObject(), "个人信息修改成功");
@@ -53,6 +55,7 @@ public class UserInfoController {
     }
 
     @GetMapping(value = "/user/list")
+    @PreAuthorize("hasAuthority('user:list')")
     public Result getUserList() {
         return Result.success(userInfoService.getUserList(), "用户列表查询成功");
     }

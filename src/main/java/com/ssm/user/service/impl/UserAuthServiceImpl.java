@@ -46,7 +46,8 @@ public class UserAuthServiceImpl implements UserAuthService {
             String jwtToken = jwtTokenProvider.generateToken(authentication);
             
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("token", jwtToken);
+            jsonObject.put("authType", "Bearer");
+            jsonObject.put("accessToken", jwtToken);
 
             String redisKey = "auth:token:" + username;
             redisUtils.set(redisKey, jsonObject.toString(), 1800);
