@@ -42,7 +42,7 @@ public class UserInfoController {
 
     @PutMapping(value = "/user/{userId}/information")
     public Result changeInformation(@PathVariable @NotNull(message = "用户ID不能为空") int userId, @RequestBody UserDTO userDTO) {
-
+        
         return Result.success(new JSONObject(), "个人信息修改成功");
     }
 

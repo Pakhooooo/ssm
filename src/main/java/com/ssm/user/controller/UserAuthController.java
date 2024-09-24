@@ -1,7 +1,7 @@
 package com.ssm.user.controller;
 
 import com.ssm.common.global.Result;
-import com.ssm.user.entity.LoginRequest;
+import com.ssm.user.dto.LoginRequestDTO;
 import com.ssm.user.service.UserAuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UserAuthController {
     }
 
     @PostMapping(value = "/auth/user/login")
-    public Result userLogin(@Valid @RequestBody LoginRequest loginRequest) {
+    public Result userLogin(@Valid @RequestBody LoginRequestDTO loginRequest) {
         return userAuthService.login(loginRequest.getUserName(), loginRequest.getPassword());
     }
     
