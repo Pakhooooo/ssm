@@ -44,7 +44,7 @@ jwt:
     
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
-  type-aliases-package: com.ssm.**.entity, com.ssm.**.vo
+  type-aliases-package: com.ssm.**.po, com.ssm.**.vo
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
