@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan("com.ssm.user.mapper")
+@MapperScan("com.ssm.*.mapper")
 @OpenAPIDefinition(
         info = @Info(
                 title = "School Sports Meet Management API", // 设置 API 文档的标题
@@ -26,7 +26,7 @@ import tk.mybatis.spring.annotation.MapperScan;
         },
         tags = {
                 @Tag(name = "User Management", description = "Operations related to user management"), // 设置文档分组
-                @Tag(name = "Event Management", description = "Operations related to event management")
+                @Tag(name = "Competition Management", description = "Operations related to competition management")
         }
 )
 public class SSMApplication {

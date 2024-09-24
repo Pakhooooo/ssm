@@ -28,7 +28,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         queryObject.setCompetitionName(competition.getCompetitionName());
         int count = competitionMapper.selectCount(queryObject);
         if (count > 0) {
-            throw new Exception("赛事名称： " + competition.getCompetitionName() + " 已经存在");
+            throw new Exception("比赛名称： " + competition.getCompetitionName() + " 已经存在");
         }
         
         return competitionMapper.insert(competition);
