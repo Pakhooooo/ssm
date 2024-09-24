@@ -1,7 +1,7 @@
 package com.ssm.user.controller;
 
 import com.ssm.common.global.Result;
-import com.ssm.user.entity.User;
+import com.ssm.user.po.User;
 import com.ssm.user.service.UserRegisterService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

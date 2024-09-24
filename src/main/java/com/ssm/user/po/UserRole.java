@@ -1,4 +1,4 @@
-package com.ssm.user.entity;
+package com.ssm.user.po;
 
 import com.ssm.common.global.BaseEntity;
 import lombok.Data;
@@ -7,18 +7,16 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "t_role_permission")
+@Table(name = "t_user_role")
 @EqualsAndHashCode(callSuper = true)
-public class RolePermission extends BaseEntity {
+public class UserRole extends BaseEntity {
     
     private Integer id;
+    
+    private Integer userId;
     
     private Integer roleId;
     
     private String roleName;
-    
-    private Integer permissionId;
-    
-    private String permissionName;
     
 }

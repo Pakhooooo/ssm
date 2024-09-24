@@ -1,6 +1,6 @@
 package com.ssm.user.mapper;
 
-import com.ssm.user.entity.User;
+import com.ssm.user.po.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

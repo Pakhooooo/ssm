@@ -1,4 +1,4 @@
-package com.ssm.user.entity;
+package com.ssm.user.po;
 
 import com.ssm.common.global.BaseEntity;
 import lombok.Data;

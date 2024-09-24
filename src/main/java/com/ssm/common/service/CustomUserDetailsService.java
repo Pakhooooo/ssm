@@ -1,8 +1,8 @@
 package com.ssm.common.service;
 
 import com.ssm.common.util.RedisUtils;
-import com.ssm.user.entity.User;
-import com.ssm.user.entity.UserRole;
+import com.ssm.user.po.User;
+import com.ssm.user.po.UserRole;
 import com.ssm.user.mapper.UserAuthMapper;
 import com.ssm.user.mapper.UserRoleMapper;
 import org.apache.commons.lang3.StringUtils;

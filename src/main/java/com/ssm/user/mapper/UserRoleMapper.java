@@ -1,6 +1,6 @@
 package com.ssm.user.mapper;
 
-import com.ssm.user.entity.UserRole;
+import com.ssm.user.po.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

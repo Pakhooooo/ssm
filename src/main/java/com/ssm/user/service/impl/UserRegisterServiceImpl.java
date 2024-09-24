@@ -1,6 +1,6 @@
 package com.ssm.user.service.impl;
 
-import com.ssm.user.entity.User;
+import com.ssm.user.po.User;
 import com.ssm.user.mapper.UserRegisterMapper;
 import com.ssm.user.service.UserRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.ssm.user.entity;
+package com.ssm.announcement.po;
 
 import com.ssm.common.global.BaseEntity;
 import lombok.Data;
@@ -7,12 +7,10 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "t_role")
+@Table(name = "t_announcement")
 @EqualsAndHashCode(callSuper = true)
-public class Role extends BaseEntity {
-
-    private Long id;
+public class Announcement extends BaseEntity {
     
-    private String roleName;
+    
     
 }
