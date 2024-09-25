@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserAuthMapper {
     
-    User findUserByUserName(String userName);
+    User findUserWithRolesAndPermissions(String userName);
     
 }

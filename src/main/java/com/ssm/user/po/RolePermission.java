@@ -15,10 +15,6 @@ public class RolePermission extends BaseEntity {
     
     private Integer roleId;
     
-    private String roleName;
-    
     private Integer permissionId;
-    
-    private String permissionName;
     
 }

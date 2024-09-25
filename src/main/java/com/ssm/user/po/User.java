@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Table(name = "t_user")
@@ -36,5 +37,6 @@ public class User extends BaseEntity {
     
     @NotBlank(message = "手机号码不能为空")
     private String phoneNumber;
-    
+
+    private List<Role> roles;
 }

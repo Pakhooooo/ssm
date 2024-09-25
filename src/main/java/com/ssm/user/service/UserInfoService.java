@@ -11,4 +11,6 @@ public interface UserInfoService {
     List<UserVO> getUserList();
     
     void deleteUserInfoById(int userId);
+    
+    void updatePassword(String token, String oldPassword, String newPassword);
 }

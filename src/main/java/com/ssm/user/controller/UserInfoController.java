@@ -28,16 +28,18 @@ public class UserInfoController {
 
     @Operation(summary = "查询用户信息")
     @GetMapping(value = "/user/{userId}")
+    @PreAuthorize("hasRole('ADMIN') or #userId == authentication.principal.id")
     public Result getUserInfo(
             @Parameter(description = "用户ID", example = "1", required = true)
             @PathVariable @NotNull(message = "用户ID不能为空") int userId) {
         UserVO userVO = userInfoService.getUserInfoById(userId);
         return Result.success(userVO, "用户信息查询成功");
     }
-
-    @PutMapping(value = "/user/change/password")
-    public Result changePassword(@RequestBody UserPasswordDTO userPasswordDTO) {
-        
+    
+    @PutMapping(value = "/user/password/change")
+    public Result changePassword(@RequestHeader("Authorization") String authorizationHeader, @RequestBody UserPasswordDTO userPasswordDTO) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        userInfoService.updatePassword(token, userPasswordDTO.getOldPassword(), userPasswordDTO.getNewPassword());
         return Result.success(new JSONObject(), "密码修改成功");
     }
 
@@ -49,6 +51,7 @@ public class UserInfoController {
     }
 
     @DeleteMapping("/user/{userId}")
+    @PreAuthorize("hasAuthority('user:delete')")
     public Result deleteUser(@PathVariable @NotNull(message = "用户ID不能为空") int userId) {
         userInfoService.deleteUserInfoById(userId);
         return Result.success(new JSONObject(), "删除用户成功");

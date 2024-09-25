@@ -1,12 +1,14 @@
 package com.ssm.common.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssm.common.global.SecurityUser;
 import com.ssm.common.util.RedisUtils;
-import com.ssm.user.po.User;
-import com.ssm.user.po.UserRole;
 import com.ssm.user.mapper.UserAuthMapper;
-import com.ssm.user.mapper.UserRoleMapper;
+import com.ssm.user.po.Permission;
+import com.ssm.user.po.Role;
+import com.ssm.user.po.User;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,69 +18,64 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final RedisUtils redisUtils;
     private final UserAuthMapper userAuthMapper;
-    private final UserRoleMapper userRoleMapper;
 
     @Autowired
-    public CustomUserDetailsService(RedisUtils redisUtils, UserAuthMapper userAuthMapper, UserRoleMapper userRoleMapper) {
+    public CustomUserDetailsService(RedisUtils redisUtils, UserAuthMapper userAuthMapper) {
         this.redisUtils = redisUtils;
         this.userAuthMapper = userAuthMapper;
-        this.userRoleMapper = userRoleMapper;
     }
 
     @Override
+    @SneakyThrows
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         // 尝试从 Redis 获取用户信息
         String cacheKey = "user:info:" + userName;
         String userJson = redisUtils.get(cacheKey);
 
-        JSONObject userObject;
+        User user;
         if (StringUtils.isEmpty(userJson)) {
-            userObject = loadUserFromDatabase(userName);
-            // 缓存用户数据到 Redis（设置过期时间）
-            redisUtils.set(cacheKey, userObject.toString(), 1800);
+            user = loadUserFromDatabase(userName);
+            // 缓存用户数据到 Redis
+            redisUtils.set(cacheKey, new JSONObject(user).toString(), 1800);
         } else {
-            userObject = new JSONObject(userJson);
+            user = new ObjectMapper().readValue(userJson, User.class);
         }
 
-        return createSpringSecurityUser(userObject);
+        // 加载用户角色和权限
+        Set<GrantedAuthority> authorities = new HashSet<>();
+
+        // 加载用户的角色
+        for (Role role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+
+            // 加载每个角色的权限
+            for (Permission permission : role.getPermissions()) {
+                authorities.add(new SimpleGrantedAuthority(permission.getPermissionKey()));
+            }
+        }
+
+        // 返回 Spring Security 所需的 UserDetails
+        return new SecurityUser(
+                user.getUserName(),
+                user.getPassword(),
+                authorities,
+                user.getId());
     }
 
-    private JSONObject loadUserFromDatabase(String userName) {
-        User user = userAuthMapper.findUserByUserName(userName);
+    private User loadUserFromDatabase(String userName) {
+        User user = userAuthMapper.findUserWithRolesAndPermissions(userName);
         if (user == null) {
             throw new UsernameNotFoundException("该账号不存在: " + userName);
         }
 
-        JSONObject userObject = new JSONObject(user);
-        List<UserRole> userRoles = userRoleMapper.getUserRoleByUserId(user.getId());
-        JSONArray rolesArray = new JSONArray(userRoles);
-        userObject.put("roles", rolesArray);
-
-        return userObject;
-    }
-
-    private UserDetails createSpringSecurityUser(JSONObject userObject) {
-        String username = userObject.get("userName").toString();
-        String password = userObject.get("password").toString();
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        JSONArray rolesArray = userObject.optJSONArray("roles");
-
-        for (int i = 0; i < rolesArray.length(); i++) {
-            JSONObject roleObject = rolesArray.optJSONObject(i);
-            // 获取 roleName 并创建 SimpleGrantedAuthority 对象
-            String roleName = roleObject.optString("roleName");
-            authorities.add(new SimpleGrantedAuthority(roleName));
-        }
-
-        return new org.springframework.security.core.userdetails.User(username, password, authorities);
+        return user;
     }
 }
