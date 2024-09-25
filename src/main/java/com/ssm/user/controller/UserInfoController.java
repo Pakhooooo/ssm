@@ -37,8 +37,8 @@ public class UserInfoController {
     
     @PutMapping(value = "/user/{userId}")
     @PreAuthorize("hasRole('ADMIN') or #userId == authentication.principal.id")
-    public Result changeInformation(@PathVariable @NotNull(message = "用户ID不能为空") int userId, @RequestBody UserDTO userDTO) {
-        
+    public Result updateInformation(@PathVariable @NotNull(message = "用户ID不能为空") int userId, @RequestBody UserDTO userDTO) {
+        userInfoService.updateUserInfoById(userId, userDTO);
         return Result.success(new JSONObject(), "个人信息修改成功");
     }
 

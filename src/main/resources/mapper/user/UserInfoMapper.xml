@@ -18,4 +18,14 @@
         UPDATE t_user SET del_status = 1 WHERE id = #{userId}
     </update>
     
+    <update id="updateUserInfo" parameterType="User">
+        UPDATE t_user SET age = #{user.age}, sex = #{user.sex}, real_name = #{user.realName}, 
+                          phone_number = #{user.phoneNumber}, update_time = #{user.updateTime}
+        WHERE id = #{user.id}
+    </update>
+    
+    <select id="getUserById" parameterType="java.lang.Integer" resultType="User">
+        SELECT id, age, sex, real_name, phone_number FROM t_user WHERE id = #{userId}
+    </select>
+    
 </mapper>

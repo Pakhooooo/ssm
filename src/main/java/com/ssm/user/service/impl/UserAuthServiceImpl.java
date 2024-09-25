@@ -65,14 +65,13 @@ public class UserAuthServiceImpl implements UserAuthService {
         // 从 Token 中提取用户名
         String username = jwtTokenProvider.getUsername(token);
 
-        // 删除 Redis 中的 Refresh Token
+        redisUtils.delete("auth:token:" + token);
+        redisUtils.delete("user:info:" + username);
         redisUtils.delete("auth:token:" + username);
 
         // 将 JWT Token 加入黑名单
         long expiration = jwtTokenProvider.getExpirationFromToken(token);
         jwtTokenProvider.addToBlacklist(token, expiration);
-        
-        redisUtils.delete("user:info:" + username);
         
         return Result.success("登出成功");
     }
