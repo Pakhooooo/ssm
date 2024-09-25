@@ -41,7 +41,7 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
             token = token.substring(7);
 
             // 尝试从缓存中获取 Token 信息
-            /*Claims claims = tokenCacheService.getCachedToken(token);
+            Claims claims = tokenCacheService.getCachedToken(token);
 
             if (claims == null) {
                 // 如果缓存未命中，解析 Token
@@ -50,10 +50,8 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
                 
                 // 将解析结果缓存，缓存时长与 Token 剩余时长相同
                 tokenCacheService.cacheToken(token, claims, remainingTime);
-            }*/
+            }
             
-            Claims claims = Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(token).getBody();
-
             // 刷新阈值，5分钟
             long refreshThreshold = 300000;
             // 检查 Token 剩余时间

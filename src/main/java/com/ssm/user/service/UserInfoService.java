@@ -12,5 +12,4 @@ public interface UserInfoService {
     
     void deleteUserInfoById(int userId);
     
-    void updatePassword(String token, String oldPassword, String newPassword);
 }

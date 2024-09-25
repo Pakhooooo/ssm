@@ -40,4 +40,8 @@
         </collection>
     </resultMap>
 
+    <update id="updateUserPasswordById">
+        UPDATE t_user SET password = #{password}, update_time = CURRENT_TIMESTAMP() WHERE id = #{userId}
+    </update>
+
 </mapper>

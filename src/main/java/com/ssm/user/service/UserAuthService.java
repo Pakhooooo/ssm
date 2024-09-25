@@ -9,4 +9,6 @@ public interface UserAuthService {
     Result logout(String token);
     
     Result refreshToken(String token);
+
+    void updatePassword(String token, String oldPassword, String newPassword);
 }
