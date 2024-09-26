@@ -1,10 +1,10 @@
 package com.ssm.competition.service;
 
 import com.ssm.competition.dto.CompetitionDTO;
+import com.ssm.competition.dto.CompetitionListDTO;
 import com.ssm.competition.po.Competition;
 import com.ssm.competition.vo.CompetitionVO;
-
-import java.util.List;
+import org.json.JSONObject;
 
 public interface CompetitionService {
     
@@ -16,5 +16,5 @@ public interface CompetitionService {
     
     CompetitionVO getCompetition(int competitionId);
     
-    List<CompetitionVO> getCompetitions();
+    JSONObject getCompetitions(CompetitionListDTO competitionListDTO);
 }

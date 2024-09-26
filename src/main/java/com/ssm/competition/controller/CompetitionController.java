@@ -2,10 +2,14 @@ package com.ssm.competition.controller;
 
 import com.ssm.common.global.Result;
 import com.ssm.competition.dto.CompetitionDTO;
+import com.ssm.competition.dto.CompetitionListDTO;
 import com.ssm.competition.po.Competition;
 import com.ssm.competition.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 public class CompetitionController {
@@ -18,6 +22,7 @@ public class CompetitionController {
     }
     
     @PostMapping(value = "/competition/add")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:add')")
     public Result addCompetition(@RequestBody Competition competition) throws Exception {
         int flag = competitionService.addCompetition(competition);
         if (flag == 0) {
@@ -28,6 +33,7 @@ public class CompetitionController {
     }
 
     @DeleteMapping(value = "/competition/{competitionId}")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:delete')")
     public Result deleteCompetition(@PathVariable int competitionId) {
         int flag = competitionService.deleteCompetition(competitionId);
         if (flag == 0) {
@@ -38,6 +44,7 @@ public class CompetitionController {
     }
     
     @PutMapping(value = "/competition/update")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:update')")
     public Result updateCompetition(@RequestBody CompetitionDTO competition) {
         int flag = competitionService.updateCompetition(competition);
         if (flag == 0) {
@@ -49,12 +56,12 @@ public class CompetitionController {
     
     @GetMapping(value = "/competition/{competitionId}")
     public Result getCompetition(@PathVariable int competitionId) {
-        return Result.success(competitionService.getCompetition(competitionId), "比赛信息信息查询成功");
+        return Result.success(competitionService.getCompetition(competitionId), "比赛信息查询成功");
     }
 
     @GetMapping(value = "/competitions")
-    public Result getCompetitions() {
-        return Result.success(competitionService.getCompetitions(), "比赛信息信息查询成功");
+    public Result getCompetitions(@Valid @RequestBody CompetitionListDTO competitionListDTO) {
+        return Result.success(competitionService.getCompetitions(competitionListDTO), "比赛信息列表查询成功");
     }
     
 }

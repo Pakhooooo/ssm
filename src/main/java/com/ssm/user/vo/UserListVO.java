@@ -1,12 +1,9 @@
 package com.ssm.user.vo;
 
-import com.ssm.common.global.BaseVO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class UserListVO extends BaseVO {
+public class UserListVO {
 
     private Integer userId;
 

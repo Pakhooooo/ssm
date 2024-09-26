@@ -1,8 +1,8 @@
 package com.ssm.user.controller;
 
 import com.ssm.common.global.Result;
-import com.ssm.user.dto.QueryUserListDTO;
 import com.ssm.user.dto.UserDTO;
+import com.ssm.user.dto.UserListDTO;
 import com.ssm.user.service.UserInfoService;
 import com.ssm.user.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,8 +53,8 @@ public class UserInfoController {
 
     @GetMapping(value = "/user/list")
     @PreAuthorize("hasAuthority('user:list')")
-    public Result getUserList(@Valid @RequestBody QueryUserListDTO queryUserListDTO) {
-        return Result.success(userInfoService.getUserList(queryUserListDTO), "用户列表查询成功");
+    public Result getUserList(@Valid @RequestBody UserListDTO userListDTO) {
+        return Result.success(userInfoService.getUserList(userListDTO), "用户列表查询成功");
     }
 
 }

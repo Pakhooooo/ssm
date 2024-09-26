@@ -2,8 +2,8 @@ package com.ssm.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ssm.user.dto.QueryUserListDTO;
 import com.ssm.user.dto.UserDTO;
+import com.ssm.user.dto.UserListDTO;
 import com.ssm.user.mapper.UserInfoMapper;
 import com.ssm.user.po.User;
 import com.ssm.user.service.UserInfoService;
@@ -32,8 +32,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public JSONObject getUserList(QueryUserListDTO queryUserListDTO) {
-        PageHelper.startPage(queryUserListDTO.getPageNum(), queryUserListDTO.getPageSize());
+    public JSONObject getUserList(UserListDTO userListDTO) {
+        PageHelper.startPage(userListDTO.getPageNum(), userListDTO.getPageSize());
         PageInfo<UserListVO> pageInfo = new PageInfo<>(userInfoMapper.getUserList());
         
         JSONObject jsonObject = new JSONObject();

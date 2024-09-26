@@ -11,7 +11,7 @@
         WHERE id = #{competitionId} AND del_status = 0
     </select>
 
-    <select id="getCompetitions" resultType="CompetitionVO">
+    <select id="getCompetitions" resultType="CompetitionListVO">
         SELECT
             id, competition_name AS competitionName, competition_date AS competitionDate,
             competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,

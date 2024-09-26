@@ -1,15 +1,19 @@
 package com.ssm.competition.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ssm.competition.dto.CompetitionDTO;
+import com.ssm.competition.dto.CompetitionListDTO;
 import com.ssm.competition.mapper.CompetitionMapper;
 import com.ssm.competition.po.Competition;
 import com.ssm.competition.service.CompetitionService;
+import com.ssm.competition.vo.CompetitionListVO;
 import com.ssm.competition.vo.CompetitionVO;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class CompetitionServiceImpl implements CompetitionService {
@@ -62,7 +66,13 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public List<CompetitionVO> getCompetitions() {
-        return competitionMapper.getCompetitions();
+    public JSONObject getCompetitions(CompetitionListDTO competitionListDTO) {
+        PageHelper.startPage(competitionListDTO.getPageNum(), competitionListDTO.getPageSize());
+        PageInfo<CompetitionListVO> pageInfo = new PageInfo<>(competitionMapper.getCompetitions());
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("total", pageInfo.getTotal());
+        jsonObject.put("list", pageInfo.getList());
+        return jsonObject;
     }
 }
