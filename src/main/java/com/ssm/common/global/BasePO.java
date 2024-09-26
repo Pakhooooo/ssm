@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class BaseEntity implements Serializable {
+public class BasePO implements Serializable {
 
     protected Date createTime;
 

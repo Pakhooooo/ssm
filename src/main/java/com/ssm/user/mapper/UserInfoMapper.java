@@ -1,6 +1,7 @@
 package com.ssm.user.mapper;
 
 import com.ssm.user.po.User;
+import com.ssm.user.vo.UserListVO;
 import com.ssm.user.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ public interface UserInfoMapper {
     
     UserVO getUserInfoById(int userId);
 
-    List<UserVO> getUserList();
+    List<UserListVO> getUserList();
     
     void deleteUserInfoById(int userId);
     

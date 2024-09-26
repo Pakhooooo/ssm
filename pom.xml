@@ -119,6 +119,12 @@
             <version>20230227</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+
         <!-- Spring Boot 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

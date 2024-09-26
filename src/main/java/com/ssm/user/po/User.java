@@ -1,6 +1,6 @@
 package com.ssm.user.po;
 
-import com.ssm.common.global.BaseEntity;
+import com.ssm.common.global.BasePO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @Table(name = "t_user")
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity {
+public class User extends BasePO {
 
     private Integer id;
     

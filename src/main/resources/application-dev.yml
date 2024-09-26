@@ -49,6 +49,14 @@ mybatis:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     
+pagehelper:
+  helperDialect: mysql                      # 数据库方言，MySQL使用mysql
+  reasonable: true                          # 合理化查询，若pageNum<=0时查询第一页，若pageNum>pages时查询最后一页
+  supportMethodsArguments: true             # 支持通过Mapper接口参数来传递分页参数
+  params: count=countSql                    # 使用count查询的参数配置
+  page-size-zero: true                      # 如果pageSize设置为0，返回所有记录（相当于不分页）
+  returnPageInfo: always                    # 总是返回PageInfo对象，包含分页信息
+    
 management:
   endpoints:
     web:

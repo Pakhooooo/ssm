@@ -1,6 +1,7 @@
 package com.ssm.user.controller;
 
 import com.ssm.common.global.Result;
+import com.ssm.user.dto.QueryUserListDTO;
 import com.ssm.user.dto.UserDTO;
 import com.ssm.user.service.UserInfoService;
 import com.ssm.user.vo.UserVO;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController
@@ -51,8 +53,8 @@ public class UserInfoController {
 
     @GetMapping(value = "/user/list")
     @PreAuthorize("hasAuthority('user:list')")
-    public Result getUserList() {
-        return Result.success(userInfoService.getUserList(), "用户列表查询成功");
+    public Result getUserList(@Valid @RequestBody QueryUserListDTO queryUserListDTO) {
+        return Result.success(userInfoService.getUserList(queryUserListDTO), "用户列表查询成功");
     }
 
 }

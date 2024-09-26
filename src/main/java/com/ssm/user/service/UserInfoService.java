@@ -1,15 +1,15 @@
 package com.ssm.user.service;
 
+import com.ssm.user.dto.QueryUserListDTO;
 import com.ssm.user.dto.UserDTO;
 import com.ssm.user.vo.UserVO;
-
-import java.util.List;
+import org.json.JSONObject;
 
 public interface UserInfoService {
     
     UserVO getUserInfoById(int userId);
-    
-    List<UserVO> getUserList();
+
+    JSONObject getUserList(QueryUserListDTO queryUserListDTO);
     
     void deleteUserInfoById(int userId);
     

@@ -64,8 +64,9 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
                 String redisKey = "auth:token:" + username;
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("token", newToken);
-
+                jsonObject.put("authType", "Bearer");
+                jsonObject.put("accessToken", newToken);
+                
                 // 把新的 Token 放 Redis
                 redisUtils.set(redisKey, jsonObject.toString(), 1800);
                 

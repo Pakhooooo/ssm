@@ -8,7 +8,7 @@
         WHERE id = #{userId} AND del_status = 0
     </select>
 
-    <select id="getUserList" resultType="UserVO">
+    <select id="getUserList" resultType="UserListVO">
         SELECT id AS userId, user_name AS userName, age, sex, real_name AS realName, phone_number AS phoneNumber
         FROM t_user
         WHERE del_status = 0
