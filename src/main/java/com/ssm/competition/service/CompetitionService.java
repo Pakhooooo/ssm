@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public interface CompetitionService {
     
-    int addCompetition(Competition competition) throws Exception;
+    int addCompetition(Competition competition);
     
     int deleteCompetition(int competitionId);
     

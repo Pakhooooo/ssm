@@ -23,7 +23,7 @@ public class CompetitionController {
     
     @PostMapping(value = "/competition/add")
     @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:add')")
-    public Result addCompetition(@RequestBody Competition competition) throws Exception {
+    public Result addCompetition(@RequestBody Competition competition) {
         int flag = competitionService.addCompetition(competition);
         if (flag == 0) {
             Result.error("新增比赛信息失败");

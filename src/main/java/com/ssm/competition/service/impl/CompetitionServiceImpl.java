@@ -26,13 +26,13 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public int addCompetition(Competition competition) throws Exception {
+    public int addCompetition(Competition competition) {
         Competition queryObject = new Competition();
         queryObject.setDelStatus(0);
         queryObject.setCompetitionName(competition.getCompetitionName());
         int count = competitionMapper.selectCount(queryObject);
         if (count > 0) {
-            throw new Exception("比赛名称： " + competition.getCompetitionName() + " 已经存在");
+            throw new RuntimeException("比赛名称： " + competition.getCompetitionName() + " 已经存在");
         }
         
         return competitionMapper.insert(competition);
