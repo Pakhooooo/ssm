@@ -66,7 +66,7 @@ public class SpringSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // 允许 Cookie
-        config.setAllowedOrigins(Collections.singletonList("*")); // 允许的域名
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173")); // 允许的域名
         config.setAllowedHeaders(Collections.singletonList("*")); // 允许的请求头
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 允许的方法
         source.registerCorsConfiguration("/**", config); // 对所有路径生效
