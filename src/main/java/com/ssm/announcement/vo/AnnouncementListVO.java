@@ -2,8 +2,6 @@ package com.ssm.announcement.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class AnnouncementListVO {
 
@@ -13,7 +11,7 @@ public class AnnouncementListVO {
 
     private String announcementContent;
 
-    private Date publishTime;
+    private String publishTime;
 
     private String publisherName;
     

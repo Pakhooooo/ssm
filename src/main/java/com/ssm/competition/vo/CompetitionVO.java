@@ -2,8 +2,6 @@ package com.ssm.competition.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class CompetitionVO {
     
@@ -11,7 +9,7 @@ public class CompetitionVO {
 
     private String competitionName;
 
-    private Date competitionDate;
+    private String competitionDate;
 
     private String competitionLocation;
 

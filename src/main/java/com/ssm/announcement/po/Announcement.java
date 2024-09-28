@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Data
 @Table(name = "t_announcement")
@@ -20,10 +19,6 @@ public class Announcement extends BasePO {
     
     private String announcementContent;
     
-    private Date publishTime;
-    
     private Integer publisherId;
-    
-    private String publisherName;
     
 }

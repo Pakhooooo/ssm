@@ -2,8 +2,6 @@ package com.ssm.competition.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class CompetitionDTO {
     
@@ -11,7 +9,7 @@ public class CompetitionDTO {
     
     private String competitionName;
     
-    private Date competitionDate;
+    private String competitionDate;
     
     private String competitionLocation;
     

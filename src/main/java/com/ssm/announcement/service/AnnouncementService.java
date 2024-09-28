@@ -12,10 +12,10 @@ public interface AnnouncementService {
 
     void deleteAnnouncement(int announcementId);
 
-    int updateAnnouncement(AnnouncementDTO announcementDTO);
+    int updateAnnouncement(AnnouncementDTO announcement);
 
     AnnouncementVO getAnnouncement(int announcementId);
 
-    JSONObject getAnnouncements(AnnouncementListDTO announcementListDTO);
+    JSONObject getAnnouncements(AnnouncementListDTO announcementList);
     
 }

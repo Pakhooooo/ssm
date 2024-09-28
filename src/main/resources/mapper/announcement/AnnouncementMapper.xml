@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssm.competition.mapper.AnnouncementMapper">
+<mapper namespace="com.ssm.announcement.mapper.AnnouncementMapper">
+    
+    <update id="deleteAnnouncementById" parameterType="java.lang.Integer">
+        UPDATE t_announcement SET del_status = 1, update_time = CURRENT_TIMESTAMP() WHERE id = #{announcementId}
+    </update>
     
     <select id="getAnnouncement" parameterType="java.lang.Integer" resultType="AnnouncementVO">
-        SELECT 
-            id, competition_name AS competitionName, competition_date AS competitionDate,
-            competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,
-            competition_description AS competitionDescription
-        FROM t_competition
-        WHERE id = #{competitionId} AND del_status = 0
+        SELECT
+            ta.id, announcement_title AS announcementTitle, announcement_content AS announcementContent,
+            ta.create_time AS publishTime, tu.real_name AS publisherName
+        FROM t_announcement ta
+        LEFT JOIN t_user tu ON ta.publisher_id = tu.id
+            AND tu.del_status = 0
+        WHERE ta.del_status = 0
+            AND ta.id = #{announcementId}
     </select>
 
     <select id="getAnnouncements" resultType="AnnouncementListVO">
         SELECT
-            id, competition_name AS competitionName, competition_date AS competitionDate,
-            competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,
-            competition_description AS competitionDescription
-        FROM t_competition
-        WHERE del_status = 0
+            ta.id, announcement_title AS announcementTitle, announcement_content AS announcementContent,
+            ta.create_time AS publishTime, tu.real_name AS publisherName
+        FROM t_announcement ta
+        LEFT JOIN t_user tu ON ta.publisher_id = tu.id 
+            AND tu.del_status = 0
+        WHERE ta.del_status = 0
     </select>
 
 </mapper>

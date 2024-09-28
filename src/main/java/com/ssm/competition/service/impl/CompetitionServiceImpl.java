@@ -32,10 +32,10 @@ public class CompetitionServiceImpl implements CompetitionService {
         queryObject.setCompetitionName(competition.getCompetitionName());
         int count = competitionMapper.selectCount(queryObject);
         if (count > 0) {
-            throw new RuntimeException("比赛名称： " + competition.getCompetitionName() + " 已经存在");
+            throw new RuntimeException("比赛名称：" + competition.getCompetitionName() + " 已经存在");
         }
         
-        return competitionMapper.insert(competition);
+        return competitionMapper.insertSelective(competition);
     }
 
     @Override
@@ -43,6 +43,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         Competition competition = new Competition();
         competition.setId(competitionId);
         competition.setDelStatus(1);
+        competition.setUpdateTime(new Date());
         return competitionMapper.updateByPrimaryKeySelective(competition);
     }
 
@@ -57,7 +58,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         updateObject.setCompetitionDescription(competition.getCompetitionDescription());
         updateObject.setUpdateTime(new Date());
         
-        return competitionMapper.updateByPrimaryKey(updateObject);
+        return competitionMapper.updateByPrimaryKeySelective(updateObject);
     }
 
     @Override

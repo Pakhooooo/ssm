@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Data
 @Table(name = "t_competition")
@@ -18,7 +17,7 @@ public class Competition extends BasePO {
     
     private String competitionName;
     
-    private Date competitionDate;
+    private String competitionDate;
     
     private String competitionLocation;
     

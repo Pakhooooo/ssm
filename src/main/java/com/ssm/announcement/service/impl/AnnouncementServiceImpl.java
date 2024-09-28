@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
     
@@ -30,10 +32,10 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         queryAnnouncement.setAnnouncementTitle(announcement.getAnnouncementTitle());
         int flag = announcementMapper.selectCount(queryAnnouncement);
         if (flag > 0) {
-            throw new RuntimeException("公告标题： " + announcement.getAnnouncementTitle() + " 已经存在");
+            throw new RuntimeException("公告标题：" + announcement.getAnnouncementTitle() + " 已经存在");
         }
         
-        return announcementMapper.insert(announcement);
+        return announcementMapper.insertSelective(announcement);
     }
 
     @Override
@@ -42,18 +44,23 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public int updateAnnouncement(AnnouncementDTO announcementDTO) {
-        return 0;
+    public int updateAnnouncement(AnnouncementDTO announcement) {
+        Announcement updateAnnouncement = new Announcement();
+        updateAnnouncement.setId(announcement.getId());
+        updateAnnouncement.setAnnouncementTitle(announcement.getAnnouncementTitle());
+        updateAnnouncement.setAnnouncementContent(announcement.getAnnouncementContent());
+        updateAnnouncement.setUpdateTime(new Date());
+        return announcementMapper.updateByPrimaryKeySelective(updateAnnouncement);
     }
 
     @Override
     public AnnouncementVO getAnnouncement(int announcementId) {
-        return null;
+        return announcementMapper.getAnnouncement(announcementId);
     }
 
     @Override
-    public JSONObject getAnnouncements(AnnouncementListDTO announcementListDTO) {
-        PageHelper.startPage(announcementListDTO.getPageNum(), announcementListDTO.getPageSize());
+    public JSONObject getAnnouncements(AnnouncementListDTO announcementList) {
+        PageHelper.startPage(announcementList.getPageNum(), announcementList.getPageSize());
         PageInfo<CompetitionListVO> pageInfo = new PageInfo<>(announcementMapper.getAnnouncements());
 
         JSONObject jsonObject = new JSONObject();
