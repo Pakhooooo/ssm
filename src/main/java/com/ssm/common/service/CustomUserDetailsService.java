@@ -35,14 +35,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @SneakyThrows
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 尝试从 Redis 获取用户信息
-        String cacheKey = "user:info:" + userName;
+        String cacheKey = "user:info:" + username;
         String userJson = redisUtils.get(cacheKey);
 
         User user;
         if (StringUtils.isEmpty(userJson)) {
-            user = loadUserFromDatabase(userName);
+            user = loadUserFromDatabase(username);
             // 缓存用户数据到 Redis
             redisUtils.set(cacheKey, new JSONObject(user).toString(), 1800);
         } else {
@@ -64,16 +64,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // 返回 Spring Security 所需的 UserDetails
         return new SecurityUser(
-                user.getUserName(),
+                user.getUsername(),
                 user.getPassword(),
                 authorities,
                 user.getId());
     }
 
-    private User loadUserFromDatabase(String userName) {
-        User user = userAuthMapper.findUserWithRolesAndPermissions(userName);
+    private User loadUserFromDatabase(String username) {
+        User user = userAuthMapper.findUserWithRolesAndPermissions(username);
         if (user == null) {
-            throw new UsernameNotFoundException("该账号不存在: " + userName);
+            throw new UsernameNotFoundException("该账号不存在: " + username);
         }
 
         return user;

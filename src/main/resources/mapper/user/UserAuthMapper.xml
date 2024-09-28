@@ -5,7 +5,7 @@
     <select id="findUserWithRolesAndPermissions" parameterType="java.lang.String" resultMap="UserResultMap">
         SELECT
             u.id AS userId,
-            u.user_name AS userName,
+            u.username AS username,
             u.password AS password,
             r.id AS roleId,
             r.role_name AS roleName,
@@ -18,13 +18,13 @@
         LEFT JOIN t_role_permission rp ON r.id = rp.role_id AND rp.del_status = 0
         LEFT JOIN t_permission p ON rp.permission_id = p.id AND p.del_status = 0
         WHERE
-            u.user_name = #{userName} 
+            u.username = #{username} 
             AND u.del_status = 0
     </select>
 
     <resultMap id="UserResultMap" type="User">
         <id property="id" column="userId" />
-        <result property="userName" column="userName" />
+        <result property="username" column="username" />
         <result property="password" column="password" />
 
         <!-- 嵌套查询角色 -->

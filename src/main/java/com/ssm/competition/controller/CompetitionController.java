@@ -59,7 +59,7 @@ public class CompetitionController {
         return Result.success(competitionService.getCompetition(competitionId), "比赛信息查询成功");
     }
 
-    @GetMapping(value = "/competitions")
+    @PostMapping(value = "/competitions")
     public Result getCompetitions(@Valid @RequestBody CompetitionListDTO competitionListDTO) {
         return Result.success(competitionService.getCompetitions(competitionListDTO), "比赛信息列表查询成功");
     }

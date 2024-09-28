@@ -9,7 +9,7 @@ public class UserVO implements Serializable {
 
     private Integer userId;
     
-    private String userName;
+    private String username;
     
     private Integer age;
     
@@ -17,6 +17,6 @@ public class UserVO implements Serializable {
     
     private String realName;
     
-    private String phoneNumber;
+    private String phone;
 
 }

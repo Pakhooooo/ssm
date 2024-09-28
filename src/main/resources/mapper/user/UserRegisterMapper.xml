@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.user.mapper.UserRegisterMapper">
 
-    <select id="getUserByUserName" parameterType="java.lang.String" resultType="User">
-        SELECT user_name AS userName 
+    <select id="getUserByUsername" parameterType="java.lang.String" resultType="User">
+        SELECT username AS username 
         FROM t_user 
-        WHERE user_name = #{userName} 
+        WHERE username = #{username} 
           AND del_status = 0
     </select>
     
-    <select id="getUserByPhoneNumber" parameterType="java.lang.String" resultType="User">
-        SELECT phone_number AS phoneNumber 
+    <select id="getUserByPhone" parameterType="java.lang.String" resultType="User">
+        SELECT phone AS phone 
         FROM t_user 
-        WHERE phone_number = #{phoneNumber}
+        WHERE phone = #{phone}
           AND del_status = 0
     </select>
 

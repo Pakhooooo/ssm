@@ -3,13 +3,13 @@
 <mapper namespace="com.ssm.user.mapper.UserInfoMapper">
 
     <select id="getUserInfoById" parameterType="java.lang.Integer" resultType="UserVO">
-        SELECT id AS userId, user_name AS userName, age, sex, real_name AS realName, phone_number AS phoneNumber
+        SELECT id AS userId, username AS username, age, sex, real_name AS realName, phone AS phone
         FROM t_user
         WHERE id = #{userId} AND del_status = 0
     </select>
 
     <select id="getUserList" resultType="UserListVO">
-        SELECT id AS userId, user_name AS userName, age, sex, real_name AS realName, phone_number AS phoneNumber
+        SELECT id AS userId, username AS username, age, sex, real_name AS realName, phone AS phone
         FROM t_user
         WHERE del_status = 0
     </select>
@@ -20,12 +20,12 @@
     
     <update id="updateUserInfo" parameterType="User">
         UPDATE t_user SET age = #{user.age}, sex = #{user.sex}, real_name = #{user.realName}, 
-                          phone_number = #{user.phoneNumber}, update_time = #{user.updateTime}
+                          phone = #{user.phone}, update_time = #{user.updateTime}
         WHERE id = #{user.id}
     </update>
     
     <select id="getUserById" parameterType="java.lang.Integer" resultType="User">
-        SELECT id, age, sex, real_name, phone_number FROM t_user WHERE id = #{userId}
+        SELECT id, age, sex, real_name, phone FROM t_user WHERE id = #{userId}
     </select>
     
 </mapper>

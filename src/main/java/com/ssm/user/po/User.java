@@ -19,7 +19,7 @@ public class User extends BasePO {
     private Integer id;
     
     @NotBlank(message = "用户名不能为空")
-    private String userName;
+    private String username;
     
     @NotBlank(message = "用户密码不能为空")
     private String password;
@@ -36,7 +36,7 @@ public class User extends BasePO {
     private String realName;
     
     @NotBlank(message = "手机号码不能为空")
-    private String phoneNumber;
+    private String phone;
 
     private List<Role> roles;
 }

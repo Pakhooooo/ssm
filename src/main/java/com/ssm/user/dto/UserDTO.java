@@ -11,6 +11,6 @@ public class UserDTO {
     
     private String realName;
     
-    private String phoneNumber;
+    private String phone;
     
 }

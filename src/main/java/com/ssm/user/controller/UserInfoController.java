@@ -51,7 +51,7 @@ public class UserInfoController {
         return Result.success(new JSONObject(), "删除用户成功");
     }
 
-    @GetMapping(value = "/user/list")
+    @PostMapping(value = "/users")
     @PreAuthorize("hasAuthority('user:list')")
     public Result getUserList(@Valid @RequestBody UserListDTO userListDTO) {
         return Result.success(userInfoService.getUserList(userListDTO), "用户列表查询成功");

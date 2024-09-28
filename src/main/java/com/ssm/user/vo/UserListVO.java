@@ -7,7 +7,7 @@ public class UserListVO {
 
     private Integer userId;
 
-    private String userName;
+    private String username;
 
     private Integer age;
 
@@ -15,6 +15,6 @@ public class UserListVO {
 
     private String realName;
 
-    private String phoneNumber;
+    private String phone;
 
 }

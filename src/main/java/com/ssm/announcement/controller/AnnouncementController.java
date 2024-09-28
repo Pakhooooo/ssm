@@ -55,7 +55,7 @@ public class AnnouncementController {
         return Result.success(announcementService.getAnnouncement(announcementId), "公告信息查询成功");
     }
 
-    @GetMapping(value = "/announcements")
+    @PostMapping(value = "/announcements")
     public Result getAnnouncements(@Valid @RequestBody AnnouncementListDTO announcementListDTO) {
         return Result.success(announcementService.getAnnouncements(announcementListDTO), "公告信息列表查询成功");
     }

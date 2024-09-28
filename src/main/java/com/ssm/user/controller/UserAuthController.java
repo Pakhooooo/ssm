@@ -24,7 +24,7 @@ public class UserAuthController {
 
     @PostMapping(value = "/auth/user/login")
     public Result userLogin(@Valid @RequestBody LoginRequestDTO loginRequest) {
-        return userAuthService.login(loginRequest.getUserName(), loginRequest.getPassword());
+        return userAuthService.login(loginRequest.getUsername(), loginRequest.getPassword());
     }
     
     @PostMapping(value = "/user/logout")

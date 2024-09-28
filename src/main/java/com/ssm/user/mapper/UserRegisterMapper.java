@@ -6,8 +6,8 @@ import tk.mybatis.mapper.common.Mapper;
 
 public interface UserRegisterMapper extends Mapper<User> {
     
-    User getUserByUserName(@Param("userName") String userName);
+    User getUserByUsername(@Param("username") String username);
     
-    User getUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+    User getUserByPhone(@Param("phone") String phone);
     
 }

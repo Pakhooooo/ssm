@@ -26,14 +26,14 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 
     @Override
     public int userRegister(User user) throws Exception {
-        User originalUser = userRegisterMapper.getUserByUserName(user.getUserName());
+        User originalUser = userRegisterMapper.getUserByUsername(user.getUsername());
         if (originalUser != null) {
-            throw new Exception("用户名 " + user.getUserName() + " 已经存在");
+            throw new Exception("用户名 " + user.getUsername() + " 已经存在");
         }
 
-        originalUser = userRegisterMapper.getUserByPhoneNumber(user.getPhoneNumber());
+        originalUser = userRegisterMapper.getUserByPhone(user.getPhone());
         if (originalUser != null) {
-            throw new Exception("手机号码 " + user.getPhoneNumber() + " 已经存在");
+            throw new Exception("手机号码 " + user.getPhone() + " 已经存在");
         }
         
         user.setPassword(passwordEncoder.encode(user.getPassword()));
