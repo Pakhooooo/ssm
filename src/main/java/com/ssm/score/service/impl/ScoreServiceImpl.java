@@ -33,10 +33,10 @@ public class ScoreServiceImpl implements ScoreService {
         queryScore.setDelStatus(0);
         int count = scoreMapper.selectCount(queryScore);
         if (count > 0) {
-            throw new RuntimeException("该学生的比赛成绩已存在，请勿重复操作");
+            throw new RuntimeException("该人员的比赛成绩已存在，请勿重复操作");
         }
         
-        return scoreMapper.insert(score);
+        return scoreMapper.insertSelective(score);
     }
 
     @Override
@@ -44,7 +44,8 @@ public class ScoreServiceImpl implements ScoreService {
         Score score = new Score();
         score.setId(scoreId);
         score.setDelStatus(1);
-        return 0;
+        score.setUpdateTime(new Date());
+        return scoreMapper.updateByPrimaryKeySelective(score);
     }
 
     @Override
@@ -53,11 +54,11 @@ public class ScoreServiceImpl implements ScoreService {
         updateScore.setId(score.getId());
         updateScore.setUserId(score.getUserId());
         updateScore.setCompetitionId(score.getCompetitionId());
-        updateScore.setScore(score.getScore());
-        updateScore.setRank(score.getRank());
+        updateScore.setCompetitionScore(score.getCompetitionScore());
+        updateScore.setCompetitionRank(score.getCompetitionRank());
         updateScore.setUpdateTime(new Date());
         
-        return 0;
+        return scoreMapper.updateByPrimaryKeySelective(updateScore);
     }
 
     @Override

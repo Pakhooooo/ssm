@@ -26,7 +26,10 @@ import tk.mybatis.spring.annotation.MapperScan;
         },
         tags = {
                 @Tag(name = "User Management", description = "Operations related to user management"), // 设置文档分组
-                @Tag(name = "Competition Management", description = "Operations related to competition management")
+                @Tag(name = "Competition Management", description = "Operations related to competition management"),
+                @Tag(name = "Announcement Management", description = "Operations related to announcement management"),
+                @Tag(name = "Register Management", description = "Operations related to register management"),
+                @Tag(name = "Score Management", description = "Operations related to score management")
         }
 )
 public class SSMApplication {

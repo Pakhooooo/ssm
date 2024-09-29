@@ -5,6 +5,7 @@ import com.ssm.announcement.dto.AnnouncementListDTO;
 import com.ssm.announcement.po.Announcement;
 import com.ssm.announcement.service.AnnouncementService;
 import com.ssm.common.global.Result;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@Tag(name = "Announcement Management", description = "Operations related to announcement management")
 public class AnnouncementController {
     
     private AnnouncementService announcementService;

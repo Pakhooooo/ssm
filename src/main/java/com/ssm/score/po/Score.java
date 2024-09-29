@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Data
-@Table(name = "t_score")
+@Table(name = "t_competition_score")
 @EqualsAndHashCode(callSuper = true)
 public class Score extends BasePO {
     
@@ -20,8 +20,8 @@ public class Score extends BasePO {
     
     private Integer competitionId;
     
-    private BigDecimal score;
+    private BigDecimal competitionScore;
     
-    private Integer rank;
+    private Integer competitionRank;
     
 }

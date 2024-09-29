@@ -13,8 +13,8 @@ public class ScoreDTO {
 
     private Integer competitionId;
 
-    private BigDecimal score;
+    private BigDecimal competitionScore;
 
-    private Integer rank;
+    private Integer competitionRank;
     
 }

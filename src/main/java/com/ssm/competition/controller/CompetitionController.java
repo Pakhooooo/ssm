@@ -5,6 +5,7 @@ import com.ssm.competition.dto.CompetitionDTO;
 import com.ssm.competition.dto.CompetitionListDTO;
 import com.ssm.competition.po.Competition;
 import com.ssm.competition.service.CompetitionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@Tag(name = "Competition Management", description = "Operations related to competition management")
 public class CompetitionController {
     
     private CompetitionService competitionService;

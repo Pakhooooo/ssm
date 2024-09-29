@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "t_register")
+@Table(name = "t_competition_register")
 @EqualsAndHashCode(callSuper = true)
 public class Register extends BasePO {
     
@@ -19,5 +19,5 @@ public class Register extends BasePO {
     
     private Integer competitionId;
     
-    private String registerStatus;
+    private String auditStatus;
 }

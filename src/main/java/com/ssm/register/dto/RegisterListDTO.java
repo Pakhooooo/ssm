@@ -8,12 +8,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class RegisterListDTO extends BaseDTO {
 
-    private Integer id;
-
     private String realName;
 
     private String competitionName;
 
-    private String registerStatus;
+    private String auditStatus;
     
 }

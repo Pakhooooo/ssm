@@ -7,10 +7,6 @@ public class RegisterDTO {
 
     private Integer id;
 
-    private Integer userId;
-
     private Integer competitionId;
-
-    private String registerStatus;
 
 }

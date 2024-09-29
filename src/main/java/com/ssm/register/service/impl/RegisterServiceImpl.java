@@ -35,7 +35,7 @@ public class RegisterServiceImpl implements RegisterService {
             throw new RuntimeException("您已报名该比赛，请勿重复操作");
         }
         
-        return registerMapper.insert(register);
+        return registerMapper.insertSelective(register);
     }
 
     @Override
@@ -43,19 +43,18 @@ public class RegisterServiceImpl implements RegisterService {
         Register register = new Register();
         register.setId(registerId);
         register.setDelStatus(1);
-        return registerMapper.updateByPrimaryKey(register);
+        register.setUpdateTime(new Date());
+        return registerMapper.updateByPrimaryKeySelective(register);
     }
 
     @Override
     public int updateRegister(RegisterDTO register) {
         Register updateObject = new Register();
         updateObject.setId(register.getId());
-        updateObject.setUserId(register.getUserId());
         updateObject.setCompetitionId(register.getCompetitionId());
-        updateObject.setRegisterStatus(register.getRegisterStatus());
         updateObject.setUpdateTime(new Date());
         
-        return registerMapper.updateByPrimaryKey(updateObject);
+        return registerMapper.updateByPrimaryKeySelective(updateObject);
     }
 
     @Override

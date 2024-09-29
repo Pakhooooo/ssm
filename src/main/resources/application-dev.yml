@@ -22,7 +22,7 @@ spring:
         max-idle: 8
         min-idle: 0
         max-wait: 2000ms
-    database: 1
+    database: 0
       
 logging:
   level:

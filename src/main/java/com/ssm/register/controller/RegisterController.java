@@ -5,6 +5,7 @@ import com.ssm.register.dto.RegisterDTO;
 import com.ssm.register.dto.RegisterListDTO;
 import com.ssm.register.po.Register;
 import com.ssm.register.service.RegisterService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@Tag(name = "Register Management", description = "Operations related to register management")
 public class RegisterController {
     
     private RegisterService registerService;
@@ -45,8 +47,8 @@ public class RegisterController {
 
     @PutMapping(value = "/register/update")
     @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:update')")
-    public Result updateRegister(@RequestBody RegisterDTO Register) {
-        int flag = registerService.updateRegister(Register);
+    public Result updateRegister(@RequestBody RegisterDTO register) {
+        int flag = registerService.updateRegister(register);
         if (flag == 0) {
             Result.error("报名信息修改失败");
         }

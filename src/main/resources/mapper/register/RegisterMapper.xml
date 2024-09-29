@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssm.competition.mapper.RegisterMapper">
+<mapper namespace="com.ssm.register.mapper.RegisterMapper">
     
     <select id="getRegister" parameterType="java.lang.Integer" resultType="RegisterVO">
         SELECT 
-            id, competition_name AS competitionName, competition_date AS competitionDate,
-            competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,
-            competition_description AS competitionDescription
-        FROM t_competition
-        WHERE id = #{competitionId} AND del_status = 0
+            tr.id, tu.real_name AS registerName, tc.competition_name AS competitionName, tr.audit_status AS auditStatus
+        FROM t_register tr
+        JOIN t_user tu ON tr.user_id = tu.id AND tu.del_status = 0
+        JOIN t_competition tc ON tr.competition_id = tc.id AND tc.del_status = 0
+        WHERE tr.id = #{registerId} AND tr.del_status = 0
     </select>
 
     <select id="getRegisters" resultType="RegisterListVO">
         SELECT
-            id, competition_name AS competitionName, competition_date AS competitionDate,
-            competition_location AS competitionLocation, competition_peroson_number AS competitionPersonNumber,
-            competition_description AS competitionDescription
-        FROM t_competition
-        WHERE del_status = 0
+            tr.id, tu.real_name AS registerName, tc.competition_name AS competitionName, tr.audit_status AS auditStatus
+        FROM t_register tr
+        JOIN t_user tu ON tr.user_id = tu.id AND tu.del_status = 0
+        JOIN t_competition tc ON tr.competition_id = tc.id AND tc.del_status = 0
+        WHERE tr.del_status = 0
     </select>
 
 </mapper>

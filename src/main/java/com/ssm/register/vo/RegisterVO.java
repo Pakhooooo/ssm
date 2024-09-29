@@ -11,6 +11,6 @@ public class RegisterVO {
     
     private String competitionName;
     
-    private String registerStatus;
+    private String auditStatus;
     
 }
