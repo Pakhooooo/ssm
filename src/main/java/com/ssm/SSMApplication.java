@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -23,13 +22,6 @@ import tk.mybatis.spring.annotation.MapperScan;
         ),
         servers = {
                 @Server(url = "http://localhost:8080/api", description = "Local Server") // 设置服务器信息
-        },
-        tags = {
-                @Tag(name = "User Management", description = "Operations related to user management"), // 设置文档分组
-                @Tag(name = "Competition Management", description = "Operations related to competition management"),
-                @Tag(name = "Announcement Management", description = "Operations related to announcement management"),
-                @Tag(name = "Register Management", description = "Operations related to register management"),
-                @Tag(name = "Score Management", description = "Operations related to score management")
         }
 )
 public class SSMApplication {
