@@ -12,4 +12,6 @@ public interface ScoreMapper extends Mapper<Score> {
     ScoreVO getScore(int scoreId);
 
     List<ScoreListVO> getScores();
+
+    void deleteScoreByCompetitionId(int competitionId);
 }

@@ -19,5 +19,9 @@
         JOIN t_competition tc ON ts.competition_id = tc.id AND tc.del_status = 0
         WHERE ts.del_status = 0
     </select>
+    
+    <update id="deleteScoreByCompetitionId" parameterType="java.lang.Integer">
+        UPDATE t_competition_score SET del_status = 1, update_time = CURRENT_TIMESTAMP() WHERE competition_id = #{competitionId}
+    </update>
 
 </mapper>

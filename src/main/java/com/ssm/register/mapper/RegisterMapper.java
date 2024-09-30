@@ -12,5 +12,6 @@ public interface RegisterMapper extends Mapper<Register> {
     RegisterVO getRegister(int registerId);
 
     List<RegisterListVO> getRegisters();
-    
+
+    void deleteRegisterByCompetitionId(int competitionId);
 }

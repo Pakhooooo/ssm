@@ -9,19 +9,28 @@ import com.ssm.competition.po.Competition;
 import com.ssm.competition.service.CompetitionService;
 import com.ssm.competition.vo.CompetitionListVO;
 import com.ssm.competition.vo.CompetitionVO;
+import com.ssm.register.mapper.RegisterMapper;
+import com.ssm.score.mapper.ScoreMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 @Service
 public class CompetitionServiceImpl implements CompetitionService {
+
+    private final ScoreMapper scoreMapper;
+
+    private final RegisterMapper registerMapper;
     
-    private CompetitionMapper competitionMapper;
+    private final CompetitionMapper competitionMapper;
 
     @Autowired
-    public void setCompetitionMapper(CompetitionMapper competitionMapper) {
+    public CompetitionServiceImpl(ScoreMapper scoreMapper, RegisterMapper registerMapper, CompetitionMapper competitionMapper) {
+        this.scoreMapper = scoreMapper;
+        this.registerMapper = registerMapper;
         this.competitionMapper = competitionMapper;
     }
 
@@ -39,12 +48,16 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public int deleteCompetition(int competitionId) {
+    @Transactional
+    public void deleteCompetition(int competitionId) {
         Competition competition = new Competition();
         competition.setId(competitionId);
         competition.setDelStatus(1);
         competition.setUpdateTime(new Date());
-        return competitionMapper.updateByPrimaryKeySelective(competition);
+        competitionMapper.updateByPrimaryKeySelective(competition);
+
+        scoreMapper.deleteScoreByCompetitionId(competitionId);
+        registerMapper.deleteRegisterByCompetitionId(competitionId);
     }
 
     @Override

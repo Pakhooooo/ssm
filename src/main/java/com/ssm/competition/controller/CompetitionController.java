@@ -37,11 +37,7 @@ public class CompetitionController {
     @DeleteMapping(value = "/competition/{competitionId}")
     @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:delete')")
     public Result deleteCompetition(@PathVariable int competitionId) {
-        int flag = competitionService.deleteCompetition(competitionId);
-        if (flag == 0) {
-            Result.error("比赛信息删除失败");
-        }
-
+        competitionService.deleteCompetition(competitionId);
         return Result.success("比赛信息删除成功");
     }
     
