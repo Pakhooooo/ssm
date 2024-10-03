@@ -1,7 +1,7 @@
 
 ---
 
-# 项目名称
+# 校运会信息管理系统
 
 > 使用 Spring Boot、Redis、JWT、Spring Security 等技术构建的后台管理系统
 
