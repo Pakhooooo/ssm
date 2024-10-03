@@ -14,7 +14,6 @@
 - [安装与使用](#安装与使用)
 - [API 接口](#api-接口)
 - [开发](#开发)
-- [许可证](#许可证)
 
 ## 简介
 
@@ -118,14 +117,7 @@ src
 - MySQL
 - Redis
 
-### 2. 克隆代码
-
-```bash
-git clone https://your-repo-url.git
-cd your-project-name
-```
-
-### 3. 配置数据库
+### 2. 配置数据库
 
 在 `src/main/resources/application.yml` 中配置 MySQL 数据库和 Redis 连接信息：
 
@@ -142,11 +134,11 @@ jwt:
   secret: your_jwt_secret_key
 ```
 
-### 4. 初始化数据库
+### 3. 初始化数据库
 
 运行 `src/resources/sql/` 目录下的 SQL 脚本以初始化数据库。
 
-### 5. 启动项目
+### 4. 启动项目
 
 在项目根目录运行以下命令启动 Spring Boot 应用：
 
@@ -154,18 +146,23 @@ jwt:
 mvn spring-boot:run
 ```
 
-服务启动后，访问 [http://localhost:8080](http://localhost:8080)。
+或找到Spring Boot的启动类运行
+```
+src/main/java/com/ssm/SSMApplication.java
+```
 
-### 6. API 文档
+服务启动后，访问 [http://localhost:8080/api/swagger-ui/index.html](http://localhost:8080/api/swagger-ui/index.html)。
 
-你可以使用 Postman 进行 API 测试。部分关键接口包括：
+### 5. API 文档
+
+您可以使用 Postman 进行 API 测试。部分关键接口包括：
 
 - **登录**: `POST /api/auth/login`
 - **获取用户信息**: `GET /api/user/{id}`
 - **创建用户**: `POST /api/user`
 - **删除用户**: `DELETE /api/user/{id}`
 
-### 7. 测试
+### 6. 测试
 
 运行以下命令执行测试：
 
