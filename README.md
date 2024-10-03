@@ -181,6 +181,11 @@ mvn test
 - **响应**:
     - 成功：返回 JWT Token
     - 失败：返回错误信息
+- 测试用户名与密码
+```
+username: admin
+password: admin
+```
 
 ### 获取用户信息
 
