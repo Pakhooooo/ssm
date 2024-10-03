@@ -73,7 +73,7 @@ public class ScoreServiceImpl implements ScoreService {
 
         BaseListVO<ScoreListVO> baseListVO = new BaseListVO<>();
         baseListVO.setTotal(pageInfo.getTotal());
-        baseListVO.setPage(pageInfo.getList());
+        baseListVO.setList(pageInfo.getList());
         return baseListVO;
     }
 }

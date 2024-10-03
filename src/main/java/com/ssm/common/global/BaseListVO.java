@@ -9,6 +9,6 @@ public class BaseListVO<T> {
     
     private Long total;
 
-    private List<T> page;
+    private List<T> list;
     
 }

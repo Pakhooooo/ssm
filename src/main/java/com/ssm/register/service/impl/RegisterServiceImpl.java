@@ -69,7 +69,7 @@ public class RegisterServiceImpl implements RegisterService {
 
         BaseListVO<RegisterListVO> baseListVO = new BaseListVO<>();
         baseListVO.setTotal(pageInfo.getTotal());
-        baseListVO.setPage(pageInfo.getList());
+        baseListVO.setList(pageInfo.getList());
         return baseListVO;
     }
 }

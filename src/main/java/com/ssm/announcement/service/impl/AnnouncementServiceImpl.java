@@ -65,7 +65,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
         BaseListVO<CompetitionListVO> baseListVO = new BaseListVO<>();
         baseListVO.setTotal(pageInfo.getTotal());
-        baseListVO.setPage(pageInfo.getList());
+        baseListVO.setList(pageInfo.getList());
         
         return baseListVO;
     }

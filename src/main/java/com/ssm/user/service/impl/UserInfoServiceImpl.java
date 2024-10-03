@@ -38,7 +38,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         
         BaseListVO<UserListVO> baseListVO = new BaseListVO<>();
         baseListVO.setTotal(pageInfo.getTotal());
-        baseListVO.setPage(pageInfo.getList());
+        baseListVO.setList(pageInfo.getList());
         return baseListVO;
     }
 
