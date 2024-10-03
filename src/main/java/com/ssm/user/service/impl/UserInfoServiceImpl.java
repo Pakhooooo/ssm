@@ -2,6 +2,7 @@ package com.ssm.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ssm.common.global.BaseListVO;
 import com.ssm.user.dto.UserDTO;
 import com.ssm.user.dto.UserListDTO;
 import com.ssm.user.mapper.UserInfoMapper;
@@ -10,7 +11,6 @@ import com.ssm.user.service.UserInfoService;
 import com.ssm.user.vo.UserListVO;
 import com.ssm.user.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,14 +32,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public JSONObject getUserList(UserListDTO userListDTO) {
+    public BaseListVO<UserListVO> getUserList(UserListDTO userListDTO) {
         PageHelper.startPage(userListDTO.getPageNum(), userListDTO.getPageSize());
         PageInfo<UserListVO> pageInfo = new PageInfo<>(userInfoMapper.getUserList());
         
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("total", pageInfo.getTotal());
-        jsonObject.put("list", pageInfo.getList());
-        return jsonObject;
+        BaseListVO<UserListVO> baseListVO = new BaseListVO<>();
+        baseListVO.setTotal(pageInfo.getTotal());
+        baseListVO.setPage(pageInfo.getList());
+        return baseListVO;
     }
 
     @Override

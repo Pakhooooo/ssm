@@ -1,10 +1,11 @@
 package com.ssm.competition.service;
 
+import com.ssm.common.global.BaseListVO;
 import com.ssm.competition.dto.CompetitionDTO;
 import com.ssm.competition.dto.CompetitionListDTO;
 import com.ssm.competition.po.Competition;
+import com.ssm.competition.vo.CompetitionListVO;
 import com.ssm.competition.vo.CompetitionVO;
-import org.json.JSONObject;
 
 public interface CompetitionService {
     
@@ -16,5 +17,5 @@ public interface CompetitionService {
     
     CompetitionVO getCompetition(int competitionId);
     
-    JSONObject getCompetitions(CompetitionListDTO competitionListDTO);
+    BaseListVO<CompetitionListVO> getCompetitions(CompetitionListDTO competitionListDTO);
 }

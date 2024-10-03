@@ -1,10 +1,11 @@
 package com.ssm.score.service;
 
+import com.ssm.common.global.BaseListVO;
 import com.ssm.score.dto.ScoreDTO;
 import com.ssm.score.dto.ScoreListDTO;
 import com.ssm.score.po.Score;
+import com.ssm.score.vo.ScoreListVO;
 import com.ssm.score.vo.ScoreVO;
-import org.json.JSONObject;
 
 public interface ScoreService {
 
@@ -16,6 +17,6 @@ public interface ScoreService {
 
     ScoreVO getScore(int scoreId);
 
-    JSONObject getScores(ScoreListDTO scoreListDTO);
+    BaseListVO<ScoreListVO> getScores(ScoreListDTO scoreListDTO);
     
 }

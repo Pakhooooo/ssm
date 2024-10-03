@@ -1,12 +1,13 @@
 package com.ssm.common.interceptor;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ssm.common.service.TokenCacheService;
 import com.ssm.common.util.RedisUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -63,12 +64,12 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 
                 String redisKey = "auth:token:" + username;
 
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("authType", "Bearer");
-                jsonObject.put("accessToken", newToken);
+                ObjectNode objectNode = new ObjectMapper().createObjectNode();
+                objectNode.put("authType", "Bearer");
+                objectNode.put("accessToken", newToken);
                 
                 // 把新的 Token 放 Redis
-                redisUtils.set(redisKey, jsonObject.toString(), 1800);
+                redisUtils.set(redisKey, objectNode.toString(), 1800);
                 
                 redisUtils.expire("user:info:" + username, 1800);
             }

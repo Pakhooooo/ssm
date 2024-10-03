@@ -2,6 +2,7 @@ package com.ssm.register.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ssm.common.global.BaseListVO;
 import com.ssm.register.dto.RegisterDTO;
 import com.ssm.register.dto.RegisterListDTO;
 import com.ssm.register.mapper.RegisterMapper;
@@ -9,7 +10,6 @@ import com.ssm.register.po.Register;
 import com.ssm.register.service.RegisterService;
 import com.ssm.register.vo.RegisterListVO;
 import com.ssm.register.vo.RegisterVO;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,13 +63,13 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public JSONObject getRegisters(RegisterListDTO registerListDTO) {
+    public BaseListVO<RegisterListVO> getRegisters(RegisterListDTO registerListDTO) {
         PageHelper.startPage(registerListDTO.getPageNum(), registerListDTO.getPageSize());
         PageInfo<RegisterListVO> pageInfo = new PageInfo<>(registerMapper.getRegisters());
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("total", pageInfo.getTotal());
-        jsonObject.put("list", pageInfo.getList());
-        return jsonObject;
+        BaseListVO<RegisterListVO> baseListVO = new BaseListVO<>();
+        baseListVO.setTotal(pageInfo.getTotal());
+        baseListVO.setPage(pageInfo.getList());
+        return baseListVO;
     }
 }

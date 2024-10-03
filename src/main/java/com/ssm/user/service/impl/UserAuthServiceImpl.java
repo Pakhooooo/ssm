@@ -1,5 +1,7 @@
 package com.ssm.user.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ssm.common.exception.AuthFailureException;
 import com.ssm.common.global.Result;
 import com.ssm.common.global.SecurityUser;
@@ -7,7 +9,6 @@ import com.ssm.common.util.JwtTokenProvider;
 import com.ssm.common.util.RedisUtils;
 import com.ssm.user.mapper.UserAuthMapper;
 import com.ssm.user.service.UserAuthService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,15 +46,15 @@ public class UserAuthServiceImpl implements UserAuthService {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwtToken = jwtTokenProvider.generateToken(authentication);
-            
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("authType", "Bearer");
-            jsonObject.put("accessToken", jwtToken);
+
+            ObjectNode objectNode = new ObjectMapper().createObjectNode();
+            objectNode.put("authType", "Bearer");
+            objectNode.put("accessToken", jwtToken);
 
             String redisKey = "auth:token:" + username;
-            redisUtils.set(redisKey, jsonObject.toString(), 1800);
+            redisUtils.set(redisKey, objectNode.toString(), 1800);
             
-            return Result.success(jsonObject, "登录成功");
+            return Result.success(objectNode, "登录成功");
             
         } catch (AuthenticationException e) {
             throw new AuthFailureException("用户名或密码错误");

@@ -4,7 +4,8 @@ import com.ssm.announcement.dto.AnnouncementDTO;
 import com.ssm.announcement.dto.AnnouncementListDTO;
 import com.ssm.announcement.po.Announcement;
 import com.ssm.announcement.vo.AnnouncementVO;
-import org.json.JSONObject;
+import com.ssm.common.global.BaseListVO;
+import com.ssm.competition.vo.CompetitionListVO;
 
 public interface AnnouncementService {
 
@@ -16,6 +17,6 @@ public interface AnnouncementService {
 
     AnnouncementVO getAnnouncement(int announcementId);
 
-    JSONObject getAnnouncements(AnnouncementListDTO announcementList);
+    BaseListVO<CompetitionListVO> getAnnouncements(AnnouncementListDTO announcementList);
     
 }

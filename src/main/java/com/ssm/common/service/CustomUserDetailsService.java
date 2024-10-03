@@ -1,5 +1,6 @@
 package com.ssm.common.service;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm.common.global.SecurityUser;
 import com.ssm.common.util.RedisUtils;
@@ -9,7 +10,6 @@ import com.ssm.user.po.Role;
 import com.ssm.user.po.User;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,12 +39,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         // 尝试从 Redis 获取用户信息
         String cacheKey = "user:info:" + username;
         String userJson = redisUtils.get(cacheKey);
-
+        
         User user;
         if (StringUtils.isEmpty(userJson)) {
             user = loadUserFromDatabase(username);
             // 缓存用户数据到 Redis
-            redisUtils.set(cacheKey, new JSONObject(user).toString(), 1800);
+            redisUtils.set(cacheKey, new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL).writeValueAsString(user), 1800);
         } else {
             user = new ObjectMapper().readValue(userJson, User.class);
         }

@@ -2,6 +2,7 @@ package com.ssm.competition.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ssm.common.global.BaseListVO;
 import com.ssm.competition.dto.CompetitionDTO;
 import com.ssm.competition.dto.CompetitionListDTO;
 import com.ssm.competition.mapper.CompetitionMapper;
@@ -11,7 +12,6 @@ import com.ssm.competition.vo.CompetitionListVO;
 import com.ssm.competition.vo.CompetitionVO;
 import com.ssm.register.mapper.RegisterMapper;
 import com.ssm.score.mapper.ScoreMapper;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,13 +80,13 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public JSONObject getCompetitions(CompetitionListDTO competitionListDTO) {
+    public BaseListVO<CompetitionListVO> getCompetitions(CompetitionListDTO competitionListDTO) {
         PageHelper.startPage(competitionListDTO.getPageNum(), competitionListDTO.getPageSize());
         PageInfo<CompetitionListVO> pageInfo = new PageInfo<>(competitionMapper.getCompetitions());
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("total", pageInfo.getTotal());
-        jsonObject.put("list", pageInfo.getList());
-        return jsonObject;
+        BaseListVO<CompetitionListVO> baseListVO = new BaseListVO<>();
+        baseListVO.setTotal(pageInfo.getTotal());
+        baseListVO.setPage(pageInfo.getList());
+        return baseListVO;
     }
 }

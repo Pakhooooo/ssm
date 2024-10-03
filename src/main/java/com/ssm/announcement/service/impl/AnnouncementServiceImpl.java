@@ -8,8 +8,8 @@ import com.ssm.announcement.mapper.AnnouncementMapper;
 import com.ssm.announcement.po.Announcement;
 import com.ssm.announcement.service.AnnouncementService;
 import com.ssm.announcement.vo.AnnouncementVO;
+import com.ssm.common.global.BaseListVO;
 import com.ssm.competition.vo.CompetitionListVO;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,13 +59,14 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public JSONObject getAnnouncements(AnnouncementListDTO announcementList) {
+    public BaseListVO<CompetitionListVO> getAnnouncements(AnnouncementListDTO announcementList) {
         PageHelper.startPage(announcementList.getPageNum(), announcementList.getPageSize());
         PageInfo<CompetitionListVO> pageInfo = new PageInfo<>(announcementMapper.getAnnouncements());
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("total", pageInfo.getTotal());
-        jsonObject.put("list", pageInfo.getList());
-        return jsonObject;
+        BaseListVO<CompetitionListVO> baseListVO = new BaseListVO<>();
+        baseListVO.setTotal(pageInfo.getTotal());
+        baseListVO.setPage(pageInfo.getList());
+        
+        return baseListVO;
     }
 }

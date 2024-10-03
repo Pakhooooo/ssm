@@ -2,6 +2,7 @@ package com.ssm.score.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ssm.common.global.BaseListVO;
 import com.ssm.score.dto.ScoreDTO;
 import com.ssm.score.dto.ScoreListDTO;
 import com.ssm.score.mapper.ScoreMapper;
@@ -9,7 +10,6 @@ import com.ssm.score.po.Score;
 import com.ssm.score.service.ScoreService;
 import com.ssm.score.vo.ScoreListVO;
 import com.ssm.score.vo.ScoreVO;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,13 +67,13 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public JSONObject getScores(ScoreListDTO scoreListDTO) {
+    public BaseListVO<ScoreListVO> getScores(ScoreListDTO scoreListDTO) {
         PageHelper.startPage(scoreListDTO.getPageNum(), scoreListDTO.getPageSize());
         PageInfo<ScoreListVO> pageInfo = new PageInfo<>(scoreMapper.getScores());
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("total", pageInfo.getTotal());
-        jsonObject.put("list", pageInfo.getList());
-        return jsonObject;
+        BaseListVO<ScoreListVO> baseListVO = new BaseListVO<>();
+        baseListVO.setTotal(pageInfo.getTotal());
+        baseListVO.setPage(pageInfo.getList());
+        return baseListVO;
     }
 }

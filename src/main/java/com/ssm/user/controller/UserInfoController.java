@@ -1,5 +1,6 @@
 package com.ssm.user.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm.common.global.Result;
 import com.ssm.user.dto.UserDTO;
 import com.ssm.user.dto.UserListDTO;
@@ -8,7 +9,6 @@ import com.ssm.user.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +41,14 @@ public class UserInfoController {
     @PreAuthorize("hasRole('ADMIN') or #userId == authentication.principal.id")
     public Result updateInformation(@PathVariable @NotNull(message = "用户ID不能为空") int userId, @RequestBody UserDTO userDTO) {
         userInfoService.updateUserInfoById(userId, userDTO);
-        return Result.success(new JSONObject(), "个人信息修改成功");
+        return Result.success(new ObjectMapper().createObjectNode(), "个人信息修改成功");
     }
 
     @DeleteMapping("/user/{userId}")
     @PreAuthorize("hasAuthority('user:delete')")
     public Result deleteUser(@PathVariable @NotNull(message = "用户ID不能为空") int userId) {
         userInfoService.deleteUserInfoById(userId);
-        return Result.success(new JSONObject(), "删除用户成功");
+        return Result.success(new ObjectMapper().createObjectNode(), "删除用户成功");
     }
 
     @PostMapping(value = "/users")

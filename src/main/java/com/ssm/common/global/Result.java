@@ -1,7 +1,7 @@
 package com.ssm.common.global;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 
 import java.util.Objects;
@@ -16,7 +16,7 @@ public class Result {
     public Result(String message, int code) {
         this.message = message;
         this.code = code;
-        this.data = new JSONObject();
+        this.data = new ObjectMapper().createObjectNode();
     }
 
     public Result(Object data, String message, int code) {
@@ -32,18 +32,18 @@ public class Result {
     // 静态方法用于成功响应
     public static Result success(Object data, String message) {
         if (Objects.isNull(data)) {
-            data = new JSONObject();
+            data = new ObjectMapper().createObjectNode();
         }
         return new Result(data, message, HttpStatus.OK.value());
     }
 
     public static Result error(String message) {
-        return new Result(new JSONObject(), message, HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return new Result(new ObjectMapper().createObjectNode(), message, HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     // 静态方法用于失败响应
     public static Result error(String message, int code) {
-        return new Result(new JSONObject(), message, code);
+        return new Result(new ObjectMapper().createObjectNode(), message, code);
     }
 
 }

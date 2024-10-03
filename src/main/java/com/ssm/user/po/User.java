@@ -24,8 +24,8 @@ public class User extends BasePO {
     @NotBlank(message = "用户密码不能为空")
     private String password;
     
-    @Min(value = 16)
-    @Max(value = 99)
+    @Min(value = 16, message = "用户年龄不能小于16")
+    @Max(value = 99, message = "用户年龄不能大于99")
     @NotNull(message = "用户年龄不能为空")
     private Integer age;
     
