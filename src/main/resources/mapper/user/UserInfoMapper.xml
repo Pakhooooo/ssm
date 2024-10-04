@@ -28,4 +28,8 @@
         SELECT id, age, sex, real_name, phone FROM t_user WHERE id = #{userId}
     </select>
     
+    <select id="getUserByName" parameterType="java.lang.String" resultType="User">
+        SELECT id, age, sex, real_name, phone FROM t_user WHERE real_name = #{name} AND del_status = 0
+    </select>
+    
 </mapper>

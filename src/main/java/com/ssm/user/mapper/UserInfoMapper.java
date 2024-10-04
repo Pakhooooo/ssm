@@ -20,4 +20,6 @@ public interface UserInfoMapper {
     void updateUserInfo(@Param("user") User user);
     
     User getUserById(int userId);
+    
+    User getUserByName(String name);
 }

@@ -8,5 +8,7 @@ public class RegisterDTO {
     private Integer id;
 
     private Integer competitionId;
+    
+    private String registerName;
 
 }

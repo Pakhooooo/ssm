@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ssm.common.global.Result;
 import com.ssm.register.dto.RegisterDTO;
 import com.ssm.register.dto.RegisterListDTO;
-import com.ssm.register.po.Register;
 import com.ssm.register.service.RegisterService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,8 @@ public class RegisterController {
 
     @PostMapping(value = "/register/add")
     @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:add')")
-    public Result addRegister(@RequestBody Register register) {
-        int flag = registerService.addRegister(register);
+    public Result addRegister(@RequestBody RegisterDTO registerDTO) {
+        int flag = registerService.addRegister(registerDTO);
         if (flag == 0) {
             Result.error("新增报名信息失败");
         }
