@@ -6,8 +6,12 @@ import lombok.Data;
 public class RegisterListVO {
 
     private Integer id;
+    
+    private Integer userId;
 
     private String registerName;
+    
+    private Integer competitionId;
 
     private String competitionName;
 

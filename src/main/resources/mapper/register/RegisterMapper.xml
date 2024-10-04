@@ -3,8 +3,8 @@
 <mapper namespace="com.ssm.register.mapper.RegisterMapper">
     
     <select id="getRegister" parameterType="java.lang.Integer" resultType="RegisterVO">
-        SELECT 
-            tr.id, tu.real_name AS registerName, tc.competition_name AS competitionName, tr.audit_status AS auditStatus
+        SELECT
+            tr.id, tu.id AS userId, tu.real_name AS registerName, tc.id AS competitionId, tc.competition_name AS competitionName, tr.audit_status AS auditStatus
         FROM t_competition_register tr
         JOIN t_user tu ON tr.user_id = tu.id AND tu.del_status = 0
         JOIN t_competition tc ON tr.competition_id = tc.id AND tc.del_status = 0
@@ -13,7 +13,7 @@
 
     <select id="getRegisters" resultType="RegisterListVO">
         SELECT
-            tr.id, tu.real_name AS registerName, tc.competition_name AS competitionName, tr.audit_status AS auditStatus
+            tr.id, tu.id AS userId, tu.real_name AS registerName, tc.id AS competitionId, tc.competition_name AS competitionName, tr.audit_status AS auditStatus
         FROM t_competition_register tr
         JOIN t_user tu ON tr.user_id = tu.id AND tu.del_status = 0
         JOIN t_competition tc ON tr.competition_id = tc.id AND tc.del_status = 0
