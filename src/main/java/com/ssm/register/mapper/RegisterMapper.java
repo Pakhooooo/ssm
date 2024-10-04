@@ -6,6 +6,7 @@ import com.ssm.register.vo.RegisterVO;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RegisterMapper extends Mapper<Register> {
 
@@ -14,4 +15,6 @@ public interface RegisterMapper extends Mapper<Register> {
     List<RegisterListVO> getRegisters();
 
     void deleteRegisterByCompetitionId(int competitionId);
+
+    List<Map<String, Object>> getCompetitionNames();
 }

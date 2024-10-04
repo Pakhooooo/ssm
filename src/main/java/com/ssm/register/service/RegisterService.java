@@ -7,6 +7,9 @@ import com.ssm.register.po.Register;
 import com.ssm.register.vo.RegisterListVO;
 import com.ssm.register.vo.RegisterVO;
 
+import java.util.List;
+import java.util.Map;
+
 public interface RegisterService {
 
     int addRegister(Register register);
@@ -18,5 +21,7 @@ public interface RegisterService {
     RegisterVO getRegister(int registerId);
 
     BaseListVO<RegisterListVO> getRegisters(RegisterListDTO registerListDTO);
+    
+    List<Map<String, Object>> getCompetitionNames();
     
 }

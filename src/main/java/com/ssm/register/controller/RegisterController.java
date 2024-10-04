@@ -1,5 +1,8 @@
 package com.ssm.register.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ssm.common.global.Result;
 import com.ssm.register.dto.RegisterDTO;
 import com.ssm.register.dto.RegisterListDTO;
@@ -11,6 +14,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @Tag(name = "Register Management", description = "Operations related to register management")
@@ -64,6 +69,19 @@ public class RegisterController {
     @PostMapping(value = "/registers")
     public Result getRegisters(@Valid @RequestBody RegisterListDTO registerListDTO) {
         return Result.success(registerService.getRegisters(registerListDTO), "报名信息列表查询成功");
+    }
+    
+    @GetMapping("/register/competition/names")
+    public Result getCompetitionNames() {
+        List<Map<String, Object>> list = registerService.getCompetitionNames();
+        ArrayNode arrayNode = new ObjectMapper().createArrayNode();
+        list.forEach(map -> {
+            ObjectNode objectNode = new ObjectMapper().createObjectNode();
+            objectNode.put("value", map.get("competitionId").toString());
+            objectNode.put("label", map.get("competitionName").toString());
+            arrayNode.add(objectNode);
+        });
+        return Result.success(arrayNode, "赛事名称查询成功");
     }
     
 }

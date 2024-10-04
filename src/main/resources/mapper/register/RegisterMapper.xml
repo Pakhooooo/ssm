@@ -23,5 +23,9 @@
     <update id="deleteRegisterByCompetitionId" parameterType="java.lang.Integer">
         UPDATE t_competition_register SET del_status = 1, update_time = CURRENT_TIMESTAMP() WHERE competition_id = #{competitionId}
     </update>
+    
+    <select id="getCompetitionNames" resultType="java.util.Map">
+        SELECT id AS competitionId, competition_name AS competitionName FROM t_competition WHERE del_status = 0 
+    </select>
 
 </mapper>
