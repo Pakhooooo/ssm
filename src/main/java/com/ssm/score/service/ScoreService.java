@@ -3,13 +3,12 @@ package com.ssm.score.service;
 import com.ssm.common.global.BaseListVO;
 import com.ssm.score.dto.ScoreDTO;
 import com.ssm.score.dto.ScoreListDTO;
-import com.ssm.score.po.Score;
 import com.ssm.score.vo.ScoreListVO;
 import com.ssm.score.vo.ScoreVO;
 
 public interface ScoreService {
 
-    int addScore(Score score);
+    int addScore(ScoreDTO scoreDTO);
 
     int deleteScore(int scoreId);
 

@@ -17,4 +17,6 @@ public class ScoreDTO {
 
     private Integer competitionRank;
     
+    private String registerName;
+    
 }

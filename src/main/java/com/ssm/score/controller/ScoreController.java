@@ -3,7 +3,6 @@ package com.ssm.score.controller;
 import com.ssm.common.global.Result;
 import com.ssm.score.dto.ScoreDTO;
 import com.ssm.score.dto.ScoreListDTO;
-import com.ssm.score.po.Score;
 import com.ssm.score.service.ScoreService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,8 @@ public class ScoreController {
 
     @PostMapping(value = "/score/add")
     @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:add')")
-    public Result addScore(@RequestBody Score score) {
-        int flag = scoreService.addScore(score);
+    public Result addScore(@RequestBody ScoreDTO scoreDTO) {
+        int flag = scoreService.addScore(scoreDTO);
         if (flag == 0) {
             Result.error("新增比赛成绩失败");
         }
