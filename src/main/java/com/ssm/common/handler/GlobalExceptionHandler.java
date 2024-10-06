@@ -70,8 +70,9 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseBody
-    @ExceptionHandler(NotOwnerException.class)
+    @ExceptionHandler({NotOwnerException.class, org.springframework.security.access.AccessDeniedException.class})
     public ResponseEntity<Result> handleNotOwnerException(Exception ex) {
+        log.error(ex.getMessage(), ex);
         Result result = new Result("您没有权限进行操作", HttpStatus.FORBIDDEN.value());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(result);
     }
