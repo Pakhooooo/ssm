@@ -8,6 +8,7 @@
             u.username AS username,
             u.password AS password,
             r.id AS roleId,
+            r.role_code AS roleCode,
             r.role_name AS roleName,
             p.id AS permissionId,
             p.permission_key AS permissionKey
@@ -30,6 +31,7 @@
         <!-- 嵌套查询角色 -->
         <collection property="roles" ofType="Role">
             <id property="id" column="roleId" />
+            <result property="roleCode" column="roleCode" />
             <result property="roleName" column="roleName" />
 
             <!-- 嵌套查询权限 -->

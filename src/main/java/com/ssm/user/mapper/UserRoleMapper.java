@@ -1,9 +1,9 @@
 package com.ssm.user.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.ssm.user.po.UserRole;
+import tk.mybatis.mapper.common.Mapper;
 
-@Mapper
-public interface UserRoleMapper {
+public interface UserRoleMapper extends Mapper<UserRole> {
     
     
     

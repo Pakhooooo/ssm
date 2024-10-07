@@ -54,7 +54,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // 加载用户的角色
         for (Role role : user.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleCode()));
 
             // 加载每个角色的权限
             for (Permission permission : role.getPermissions()) {
