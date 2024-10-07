@@ -49,10 +49,10 @@ public class RegisterController {
         return Result.success("报名信息删除成功");
     }
 
-    @PutMapping(value = "/register/update")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:update')")
-    public Result updateRegister(@RequestBody RegisterDTO register) {
-        int flag = registerService.updateRegister(register);
+    @PutMapping(value = "/register/edit")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:edit')")
+    public Result editRegister(@RequestBody RegisterDTO register) {
+        int flag = registerService.editRegister(register);
         if (flag == 0) {
             Result.error("报名信息修改失败");
         }
@@ -61,11 +61,13 @@ public class RegisterController {
     }
 
     @GetMapping(value = "/register/{registerId}")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:get')")
     public Result getRegister(@PathVariable int registerId) {
         return Result.success(registerService.getRegister(registerId), "报名信息查询成功");
     }
 
     @PostMapping(value = "/registers")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:list')")
     public Result getRegisters(@Valid @RequestBody RegisterListDTO registerListDTO) {
         return Result.success(registerService.getRegisters(registerListDTO), "报名信息列表查询成功");
     }

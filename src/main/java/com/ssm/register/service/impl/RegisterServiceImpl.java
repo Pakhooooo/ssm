@@ -67,7 +67,7 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public int updateRegister(RegisterDTO register) {
+    public int editRegister(RegisterDTO register) {
         Register updateObject = new Register();
         updateObject.setId(register.getId());
         updateObject.setCompetitionId(register.getCompetitionId());

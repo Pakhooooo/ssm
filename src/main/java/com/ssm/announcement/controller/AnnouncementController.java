@@ -41,10 +41,10 @@ public class AnnouncementController {
         return Result.success("公告信息删除成功");
     }
 
-    @PutMapping(value = "/announcement/update")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('announcement:update')")
-    public Result updateAnnouncement(@RequestBody AnnouncementDTO announcementDTO) {
-        int flag = announcementService.updateAnnouncement(announcementDTO);
+    @PutMapping(value = "/announcement/edit")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('announcement:edit')")
+    public Result editAnnouncement(@RequestBody AnnouncementDTO announcementDTO) {
+        int flag = announcementService.editAnnouncement(announcementDTO);
         if (flag == 0) {
             Result.error("公告信息修改失败");
         }
@@ -53,11 +53,13 @@ public class AnnouncementController {
     }
 
     @GetMapping(value = "/announcement/{announcementId}")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('announcement:get')")
     public Result getAnnouncement(@PathVariable int announcementId) {
         return Result.success(announcementService.getAnnouncement(announcementId), "公告信息查询成功");
     }
 
     @PostMapping(value = "/announcements")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('announcement:list')")
     public Result getAnnouncements(@Valid @RequestBody AnnouncementListDTO announcementListDTO) {
         return Result.success(announcementService.getAnnouncements(announcementListDTO), "公告信息列表查询成功");
     }

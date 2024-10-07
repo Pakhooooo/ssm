@@ -1,5 +1,6 @@
 package com.ssm.user.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ssm.common.exception.AuthFailureException;
@@ -47,9 +48,12 @@ public class UserAuthServiceImpl implements UserAuthService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwtToken = jwtTokenProvider.generateToken(authentication);
 
-            ObjectNode objectNode = new ObjectMapper().createObjectNode();
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode objectNode = objectMapper.createObjectNode();
             objectNode.put("authType", "Bearer");
             objectNode.put("accessToken", jwtToken);
+
+            objectNode.set("user", objectMapper.readTree(redisUtils.get("user:info:" + username)));
 
             String redisKey = "auth:token:" + username;
             redisUtils.set(redisKey, objectNode.toString(), 1800);
@@ -58,6 +62,8 @@ public class UserAuthServiceImpl implements UserAuthService {
             
         } catch (AuthenticationException e) {
             throw new AuthFailureException("用户名或密码错误");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 

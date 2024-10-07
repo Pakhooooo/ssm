@@ -45,14 +45,14 @@ public class UserInfoController {
     }
 
     @DeleteMapping("/user/{userId}")
-    @PreAuthorize("hasAuthority('user:delete')")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('user:delete')")
     public Result deleteUser(@PathVariable @NotNull(message = "用户ID不能为空") int userId) {
         userInfoService.deleteUserInfoById(userId);
         return Result.success(new ObjectMapper().createObjectNode(), "删除用户成功");
     }
 
     @PostMapping(value = "/users")
-    @PreAuthorize("hasAuthority('user:list')")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('user:list')")
     public Result getUserList(@Valid @RequestBody UserListDTO userListDTO) {
         return Result.success(userInfoService.getUserList(userListDTO), "用户列表查询成功");
     }

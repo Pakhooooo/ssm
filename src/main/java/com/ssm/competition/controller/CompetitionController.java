@@ -41,10 +41,10 @@ public class CompetitionController {
         return Result.success("比赛信息删除成功");
     }
     
-    @PutMapping(value = "/competition/update")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:update')")
-    public Result updateCompetition(@RequestBody CompetitionDTO competition) {
-        int flag = competitionService.updateCompetition(competition);
+    @PutMapping(value = "/competition/edit")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:edit')")
+    public Result editCompetition(@RequestBody CompetitionDTO competition) {
+        int flag = competitionService.editCompetition(competition);
         if (flag == 0) {
             Result.error("比赛信息修改失败");
         }
@@ -53,11 +53,13 @@ public class CompetitionController {
     }
     
     @GetMapping(value = "/competition/{competitionId}")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:get')")
     public Result getCompetition(@PathVariable int competitionId) {
         return Result.success(competitionService.getCompetition(competitionId), "比赛信息查询成功");
     }
 
     @PostMapping(value = "/competitions")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:list')")
     public Result getCompetitions(@Valid @RequestBody CompetitionListDTO competitionListDTO) {
         return Result.success(competitionService.getCompetitions(competitionListDTO), "比赛信息列表查询成功");
     }

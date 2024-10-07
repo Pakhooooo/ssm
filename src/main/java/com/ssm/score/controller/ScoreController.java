@@ -44,10 +44,10 @@ public class ScoreController {
         return Result.success("比赛成绩删除成功");
     }
 
-    @PutMapping(value = "/score/update")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:update')")
-    public Result updateScore(@RequestBody ScoreDTO Score) {
-        int flag = scoreService.updateScore(Score);
+    @PutMapping(value = "/score/edit")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:edit')")
+    public Result editScore(@RequestBody ScoreDTO Score) {
+        int flag = scoreService.editScore(Score);
         if (flag == 0) {
             Result.error("比赛成绩修改失败");
         }
@@ -56,11 +56,13 @@ public class ScoreController {
     }
 
     @GetMapping(value = "/score/{scoreId}")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:get')")
     public Result getScore(@PathVariable int scoreId) {
         return Result.success(scoreService.getScore(scoreId), "比赛成绩查询成功");
     }
 
     @PostMapping(value = "/scores")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:list')")
     public Result getScores(@Valid @RequestBody ScoreListDTO scoreListDTO) {
         return Result.success(scoreService.getScores(scoreListDTO), "比赛成绩列表查询成功");
     }

@@ -13,7 +13,7 @@ public interface CompetitionService {
     
     void deleteCompetition(int competitionId);
     
-    int updateCompetition(CompetitionDTO competition);
+    int editCompetition(CompetitionDTO competition);
     
     CompetitionVO getCompetition(int competitionId);
     
