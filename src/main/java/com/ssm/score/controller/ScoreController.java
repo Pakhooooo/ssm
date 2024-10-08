@@ -44,10 +44,10 @@ public class ScoreController {
         return Result.success("比赛成绩删除成功");
     }
 
-    @PutMapping(value = "/score/edit")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:edit')")
-    public Result editScore(@RequestBody ScoreDTO Score) {
-        int flag = scoreService.editScore(Score);
+    @PutMapping(value = "/score/update")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('score:update')")
+    public Result updateScore(@RequestBody ScoreDTO Score) {
+        int flag = scoreService.updateScore(Score);
         if (flag == 0) {
             Result.error("比赛成绩修改失败");
         }

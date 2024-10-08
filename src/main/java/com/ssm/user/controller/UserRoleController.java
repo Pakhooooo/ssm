@@ -41,9 +41,9 @@ public class UserRoleController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping(value = "/user/role/edit")
-    public Result editUserRole(@RequestBody UserRoleDTO userRoleDTO) {
-        int flag = userRoleService.editUserRole(userRoleDTO);
+    @PutMapping(value = "/user/role/update")
+    public Result updateUserRole(@RequestBody UserRoleDTO userRoleDTO) {
+        int flag = userRoleService.updateUserRole(userRoleDTO);
         if (flag == 0) {
             Result.error("修改用户角色失败");
         }

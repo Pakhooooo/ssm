@@ -44,7 +44,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public int editAnnouncement(AnnouncementDTO announcement) {
+    public int updateAnnouncement(AnnouncementDTO announcement) {
         Announcement updateAnnouncement = new Announcement();
         updateAnnouncement.setId(announcement.getId());
         updateAnnouncement.setAnnouncementTitle(announcement.getAnnouncementTitle());

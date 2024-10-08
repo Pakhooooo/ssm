@@ -61,7 +61,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public int editCompetition(CompetitionDTO competition) {
+    public int updateCompetition(CompetitionDTO competition) {
         Competition updateObject = new Competition();
         updateObject.setId(competition.getId());
         updateObject.setCompetitionName(competition.getCompetitionName());

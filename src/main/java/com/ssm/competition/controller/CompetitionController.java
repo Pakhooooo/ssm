@@ -41,10 +41,10 @@ public class CompetitionController {
         return Result.success("比赛信息删除成功");
     }
     
-    @PutMapping(value = "/competition/edit")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:edit')")
-    public Result editCompetition(@RequestBody CompetitionDTO competition) {
-        int flag = competitionService.editCompetition(competition);
+    @PutMapping(value = "/competition/update")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('competition:update')")
+    public Result updateCompetition(@RequestBody CompetitionDTO competition) {
+        int flag = competitionService.updateCompetition(competition);
         if (flag == 0) {
             Result.error("比赛信息修改失败");
         }

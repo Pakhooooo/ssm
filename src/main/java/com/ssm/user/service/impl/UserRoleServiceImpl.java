@@ -42,7 +42,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public int editUserRole(UserRoleDTO userRoleDTO) {
+    public int updateUserRole(UserRoleDTO userRoleDTO) {
         UserRole userRole = new UserRole();
         userRole.setId(userRoleDTO.getId());
         userRole.setRoleId(userRoleDTO.getRoleId());

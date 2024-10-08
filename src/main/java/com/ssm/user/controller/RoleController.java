@@ -42,9 +42,9 @@ public class RoleController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping(value = "/role/edit")
-    public Result editRole(@RequestBody RoleDTO roleDTO) {
-        int flag = roleService.editRole(roleDTO);
+    @PutMapping(value = "/role/update")
+    public Result updateRole(@RequestBody RoleDTO roleDTO) {
+        int flag = roleService.updateRole(roleDTO);
         if (flag == 0) {
             Result.error("修改角色失败");
         }

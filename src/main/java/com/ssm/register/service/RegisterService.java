@@ -15,7 +15,7 @@ public interface RegisterService {
 
     int deleteRegister(int registerId);
 
-    int editRegister(RegisterDTO register);
+    int updateRegister(RegisterDTO register);
 
     RegisterVO getRegister(int registerId);
 

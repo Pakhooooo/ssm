@@ -13,7 +13,7 @@ public interface AnnouncementService {
 
     void deleteAnnouncement(int announcementId);
 
-    int editAnnouncement(AnnouncementDTO announcement);
+    int updateAnnouncement(AnnouncementDTO announcement);
 
     AnnouncementVO getAnnouncement(int announcementId);
 

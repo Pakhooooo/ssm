@@ -47,7 +47,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public int editRole(RoleDTO roleDTO) {
+    public int updateRole(RoleDTO roleDTO) {
         Role role = new Role();
         role.setId(roleDTO.getId());
         role.setRoleName(roleDTO.getRoleName());

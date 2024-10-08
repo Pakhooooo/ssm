@@ -10,7 +10,7 @@ public interface UserRoleService {
 
     int deleteUserRole(int userRoleId);
 
-    int editUserRole(UserRoleDTO userRoleDTO);
+    int updateUserRole(UserRoleDTO userRoleDTO);
 
     UserRoleListVO getUserRoles();
     

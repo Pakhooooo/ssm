@@ -58,7 +58,6 @@ public class UserInfoServiceImpl implements UserInfoService {
         user.setSex(StringUtils.isEmpty(userDTO.getSex()) ? user.getSex() : userDTO.getSex());
         user.setRealName(StringUtils.isEmpty(userDTO.getRealName()) ? user.getRealName() : userDTO.getRealName());
         user.setPhone(StringUtils.isEmpty(userDTO.getPhone()) ? user.getPhone() : userDTO.getPhone());
-        user.setUpdateTime(new Date());
         
         userInfoMapper.updateUserInfo(user);
     }

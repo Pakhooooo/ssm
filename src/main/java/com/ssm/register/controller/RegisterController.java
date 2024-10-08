@@ -49,10 +49,10 @@ public class RegisterController {
         return Result.success("报名信息删除成功");
     }
 
-    @PutMapping(value = "/register/edit")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:edit')")
-    public Result editRegister(@RequestBody RegisterDTO register) {
-        int flag = registerService.editRegister(register);
+    @PutMapping(value = "/register/update")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('register:update')")
+    public Result updateRegister(@RequestBody RegisterDTO register) {
+        int flag = registerService.updateRegister(register);
         if (flag == 0) {
             Result.error("报名信息修改失败");
         }

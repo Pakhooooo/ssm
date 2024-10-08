@@ -68,7 +68,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public int editScore(ScoreDTO score) {
+    public int updateScore(ScoreDTO score) {
         Score updateScore = new Score();
         updateScore.setId(score.getId());
         updateScore.setUserId(score.getUserId());

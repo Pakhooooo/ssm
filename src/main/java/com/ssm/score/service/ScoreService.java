@@ -12,7 +12,7 @@ public interface ScoreService {
 
     int deleteScore(int scoreId);
 
-    int editScore(ScoreDTO score);
+    int updateScore(ScoreDTO score);
 
     ScoreVO getScore(int scoreId);
 

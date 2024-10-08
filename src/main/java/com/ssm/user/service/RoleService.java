@@ -12,7 +12,7 @@ public interface RoleService {
     
     int deleteRole(int roleId);
     
-    int editRole(RoleDTO role);
+    int updateRole(RoleDTO role);
 
     BaseListVO<RoleListVO> getRoles(RoleListDTO roleListDTO);
     

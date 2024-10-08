@@ -41,10 +41,10 @@ public class AnnouncementController {
         return Result.success("公告信息删除成功");
     }
 
-    @PutMapping(value = "/announcement/edit")
-    @PreAuthorize("hasRole('ADMIN') or hasAuthority('announcement:edit')")
-    public Result editAnnouncement(@RequestBody AnnouncementDTO announcementDTO) {
-        int flag = announcementService.editAnnouncement(announcementDTO);
+    @PutMapping(value = "/announcement/update")
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('announcement:update')")
+    public Result updateAnnouncement(@RequestBody AnnouncementDTO announcementDTO) {
+        int flag = announcementService.updateAnnouncement(announcementDTO);
         if (flag == 0) {
             Result.error("公告信息修改失败");
         }
