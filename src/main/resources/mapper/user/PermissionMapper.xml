@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.user.mapper.PermissionMapper">
+    
+    <select id="getPermissions" resultType="PermissionListVO">
+        SELECT 
+            id, permission_name AS permissionName, permission_key AS permissionKey, permission_url AS permissionURL, method, permission_type AS permissionType
+        FROM t_permission 
+        WHERE del_status = 0
+    </select>
+    
+</mapper>

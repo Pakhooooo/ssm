@@ -1,6 +1,6 @@
 package com.ssm.user.service.impl;
 
-import com.ssm.common.exception.UserRoleAlreadyExistsException;
+import com.ssm.common.exception.AlreadyExistsException;
 import com.ssm.user.dto.UserRoleDTO;
 import com.ssm.user.mapper.UserRoleMapper;
 import com.ssm.user.po.UserRole;
@@ -25,7 +25,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         try {
             return userRoleMapper.insertSelective(userRole);
         } catch (DuplicateKeyException e) {
-            throw new UserRoleAlreadyExistsException("该用户角色已存在，请勿重复操作");
+            throw new AlreadyExistsException("该用户角色已存在，请勿重复操作");
         }
     }
 
@@ -49,7 +49,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         try {
             return userRoleMapper.updateByPrimaryKeySelective(userRole);
         } catch (DuplicateKeyException e) {
-            throw new UserRoleAlreadyExistsException("该用户角色已存在，请勿重复操作");
+            throw new AlreadyExistsException("该用户角色已存在，请勿重复操作");
         }
     }
 

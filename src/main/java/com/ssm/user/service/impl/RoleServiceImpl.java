@@ -2,7 +2,7 @@ package com.ssm.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ssm.common.exception.RoleAlreadyExistsException;
+import com.ssm.common.exception.AlreadyExistsException;
 import com.ssm.common.global.BaseListVO;
 import com.ssm.user.dto.RoleDTO;
 import com.ssm.user.dto.RoleListDTO;
@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
             role.setRoleCode(role.getRoleCode().toUpperCase());
             return roleMapper.insertSelective(role);
         } catch (DuplicateKeyException e) {
-            throw new RoleAlreadyExistsException("该角色已存在，请勿重复操作");
+            throw new AlreadyExistsException("该角色已存在，请勿重复操作");
         }
     }
 
@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService {
         try {
             return roleMapper.updateByPrimaryKeySelective(role);
         } catch (DuplicateKeyException e) {
-            throw new RoleAlreadyExistsException("该角色已存在，请勿重复操作");
+            throw new AlreadyExistsException("该角色已存在，请勿重复操作");
         }
     }
 
