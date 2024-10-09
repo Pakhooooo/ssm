@@ -4,6 +4,7 @@ import com.ssm.common.global.BasePO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class User extends BasePO {
 
+    @Id
     private Integer id;
     
     @NotBlank(message = "用户名不能为空")
