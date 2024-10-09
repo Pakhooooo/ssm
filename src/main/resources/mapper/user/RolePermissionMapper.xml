@@ -7,7 +7,7 @@
     </select>
     
     <update id="deleteRolePermissionByRoleId" parameterType="java.lang.Integer">
-        UPDATE t_role_permission SET del_status = 1 WHERE role_id = #{roleId}
+        UPDATE t_role_permission SET del_status = 1 WHERE role_id = #{roleId} AND del_status = 0
     </update>
 
 </mapper>

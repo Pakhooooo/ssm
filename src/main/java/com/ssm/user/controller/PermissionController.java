@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @Tag(name = "User Role Permission Management", description = "Operations related to user role permission management")
 public class PermissionController {
@@ -56,7 +58,7 @@ public class PermissionController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/permissions")
-    public Result getRoles(@RequestBody PermissionListDTO permissionListDTO) {
+    public Result getRoles(@Valid @RequestBody PermissionListDTO permissionListDTO) {
         return Result.success(permissionService.getPermissions(permissionListDTO), "权限列表查询成功");
     }
     
