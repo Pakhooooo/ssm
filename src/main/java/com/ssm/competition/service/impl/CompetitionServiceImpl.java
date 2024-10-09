@@ -16,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
 @Service
 public class CompetitionServiceImpl implements CompetitionService {
 
@@ -53,7 +51,6 @@ public class CompetitionServiceImpl implements CompetitionService {
         Competition competition = new Competition();
         competition.setId(competitionId);
         competition.setDelStatus(1);
-        competition.setUpdateTime(new Date());
         competitionMapper.updateByPrimaryKeySelective(competition);
 
         scoreMapper.deleteScoreByCompetitionId(competitionId);
@@ -69,7 +66,6 @@ public class CompetitionServiceImpl implements CompetitionService {
         updateObject.setCompetitionLocation(competition.getCompetitionLocation());
         updateObject.setCompetitionPersonNumber(competition.getCompetitionPersonNumber());
         updateObject.setCompetitionDescription(competition.getCompetitionDescription());
-        updateObject.setUpdateTime(new Date());
         
         return competitionMapper.updateByPrimaryKeySelective(updateObject);
     }

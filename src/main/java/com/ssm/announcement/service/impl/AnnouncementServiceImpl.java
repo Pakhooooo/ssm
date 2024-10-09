@@ -13,8 +13,6 @@ import com.ssm.competition.vo.CompetitionListVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
     
@@ -49,7 +47,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         updateAnnouncement.setId(announcement.getId());
         updateAnnouncement.setAnnouncementTitle(announcement.getAnnouncementTitle());
         updateAnnouncement.setAnnouncementContent(announcement.getAnnouncementContent());
-        updateAnnouncement.setUpdateTime(new Date());
         return announcementMapper.updateByPrimaryKeySelective(updateAnnouncement);
     }
 

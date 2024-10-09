@@ -21,7 +21,7 @@
     </select>
     
     <update id="deleteScoreByCompetitionId" parameterType="java.lang.Integer">
-        UPDATE t_competition_score SET del_status = 1, update_time = CURRENT_TIMESTAMP() WHERE competition_id = #{competitionId}
+        UPDATE t_competition_score SET del_status = 1 WHERE competition_id = #{competitionId}
     </update>
 
 </mapper>

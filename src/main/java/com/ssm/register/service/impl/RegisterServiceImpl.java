@@ -15,7 +15,6 @@ import com.ssm.user.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +61,6 @@ public class RegisterServiceImpl implements RegisterService {
         Register register = new Register();
         register.setId(registerId);
         register.setDelStatus(1);
-        register.setUpdateTime(new Date());
         return registerMapper.updateByPrimaryKeySelective(register);
     }
 
@@ -71,7 +69,6 @@ public class RegisterServiceImpl implements RegisterService {
         Register updateObject = new Register();
         updateObject.setId(register.getId());
         updateObject.setCompetitionId(register.getCompetitionId());
-        updateObject.setUpdateTime(new Date());
         
         return registerMapper.updateByPrimaryKeySelective(updateObject);
     }

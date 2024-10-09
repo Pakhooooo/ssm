@@ -15,8 +15,6 @@ import com.ssm.user.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class ScoreServiceImpl implements ScoreService {
     
@@ -63,7 +61,6 @@ public class ScoreServiceImpl implements ScoreService {
         Score score = new Score();
         score.setId(scoreId);
         score.setDelStatus(1);
-        score.setUpdateTime(new Date());
         return scoreMapper.updateByPrimaryKeySelective(score);
     }
 
@@ -75,7 +72,6 @@ public class ScoreServiceImpl implements ScoreService {
         updateScore.setCompetitionId(score.getCompetitionId());
         updateScore.setCompetitionScore(score.getCompetitionScore());
         updateScore.setCompetitionRank(score.getCompetitionRank());
-        updateScore.setUpdateTime(new Date());
         
         return scoreMapper.updateByPrimaryKeySelective(updateScore);
     }

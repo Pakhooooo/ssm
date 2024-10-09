@@ -20,7 +20,7 @@
     
     <update id="updateUserInfo" parameterType="User">
         UPDATE t_user SET age = #{user.age}, sex = #{user.sex}, real_name = #{user.realName}, 
-                          phone = #{user.phone}, update_time = #{user.updateTime}
+                          phone = #{user.phone}
         WHERE id = #{user.id}
     </update>
     

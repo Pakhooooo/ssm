@@ -3,7 +3,7 @@
 <mapper namespace="com.ssm.announcement.mapper.AnnouncementMapper">
     
     <update id="deleteAnnouncementById" parameterType="java.lang.Integer">
-        UPDATE t_announcement SET del_status = 1, update_time = CURRENT_TIMESTAMP() WHERE id = #{announcementId}
+        UPDATE t_announcement SET del_status = 1 WHERE id = #{announcementId}
     </update>
     
     <select id="getAnnouncement" parameterType="java.lang.Integer" resultType="AnnouncementVO">
