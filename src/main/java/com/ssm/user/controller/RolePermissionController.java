@@ -3,6 +3,7 @@ package com.ssm.user.controller;
 import com.ssm.common.global.Result;
 import com.ssm.user.dto.RolePermissionDTO;
 import com.ssm.user.service.RolePermissionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Tag(name = "User Role Permission Management", description = "Operations related to user role permission management")
 public class RolePermissionController {
     
     private RolePermissionService rolePermissionService;

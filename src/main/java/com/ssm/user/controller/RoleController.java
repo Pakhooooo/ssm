@@ -5,11 +5,13 @@ import com.ssm.user.dto.RoleDTO;
 import com.ssm.user.dto.RoleListDTO;
 import com.ssm.user.po.Role;
 import com.ssm.user.service.RoleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Tag(name = "User Role Permission Management", description = "Operations related to user role permission management")
 public class RoleController {
     
     private RoleService roleService;
