@@ -9,6 +9,6 @@ public class RolePermissionDTO {
     
     private Integer roleId;
     
-    private List<Integer> permissionId;
+    private List<Integer> permissionIds;
     
 }
