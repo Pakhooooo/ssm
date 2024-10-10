@@ -24,6 +24,4 @@ public class Permission extends BasePO {
     
     private String permissionURL;
     
-    private String method;
-    
 }

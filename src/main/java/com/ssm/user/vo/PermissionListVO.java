@@ -13,8 +13,6 @@ public class PermissionListVO {
     
     private String permissionURL;
     
-    private String method;
-    
     private String permissionType;
     
 }

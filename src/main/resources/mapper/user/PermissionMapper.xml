@@ -4,7 +4,7 @@
     
     <select id="getPermissions" resultType="PermissionListVO">
         SELECT 
-            id, permission_name AS permissionName, permission_key AS permissionKey, permission_url AS permissionURL, method, permission_type AS permissionType
+            id, permission_name AS permissionName, permission_key AS permissionKey, permission_url AS permissionURL, permission_type AS permissionType
         FROM t_permission 
         WHERE del_status = 0
     </select>
