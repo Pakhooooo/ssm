@@ -8,6 +8,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class PermissionListDTO extends BaseDTO {
     
-    
+    private String permissionName;
     
 }

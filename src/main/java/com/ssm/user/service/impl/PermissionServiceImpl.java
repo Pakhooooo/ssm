@@ -48,6 +48,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public int updatePermission(PermissionDTO permissionDTO) {
         Permission permission = new Permission();
+        permission.setId(permissionDTO.getPermissionId());
         permission.setPermissionName(permissionDTO.getPermissionName());
         try {
             return permissionMapper.updateByPrimaryKeySelective(permission);
