@@ -2,6 +2,8 @@ package com.ssm.user.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class RoleListVO {
 
@@ -10,5 +12,7 @@ public class RoleListVO {
     private String roleCode;
     
     private String roleName;
+    
+    private List<PermissionVO> permissions;
 
 }
