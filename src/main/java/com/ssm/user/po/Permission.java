@@ -22,8 +22,6 @@ public class Permission extends BasePO {
     @NotBlank(message = "权限Key不能为空")
     private String permissionKey;
     
-    private String permissionURL;
-    
     private String permissionType;
     
 }

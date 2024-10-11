@@ -11,8 +11,6 @@ public class PermissionListVO {
     
     private String permissionKey;
     
-    private String permissionURL;
-    
     private String permissionType;
     
 }

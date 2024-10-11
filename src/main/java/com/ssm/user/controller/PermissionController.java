@@ -24,7 +24,7 @@ public class PermissionController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = "/permissionId/add")
+    @PostMapping(value = "/permission/add")
     public Result addRole(@RequestBody Permission permission) {
         int flag = permissionService.addPermission(permission);
         if (flag == 0) {
