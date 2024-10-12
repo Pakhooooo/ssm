@@ -2,11 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.user.mapper.PermissionMapper">
     
-    <select id="getPermissions" resultType="PermissionListVO">
+    <select id="getPermissions" parameterType="PermissionListDTO" resultType="PermissionListVO">
         SELECT 
             id, permission_name AS permissionName, permission_key AS permissionKey
         FROM t_permission 
         WHERE del_status = 0
+        <if test="permission.permissionName != '' and permission.permissionName != null ">
+            AND permission_name = #{permission.permissionName}
+        </if>
+        <if test="permission.permissionType != '' and permission.permissionType != null ">
+            AND permission_type = #{permission.permissionType}
+        </if>
     </select>
     
 </mapper>

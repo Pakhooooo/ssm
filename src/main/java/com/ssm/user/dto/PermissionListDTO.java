@@ -10,4 +10,6 @@ public class PermissionListDTO extends BaseDTO {
     
     private String permissionName;
     
+    private String permissionType;
+    
 }

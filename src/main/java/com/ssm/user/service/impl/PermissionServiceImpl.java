@@ -60,7 +60,7 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public BaseListVO<PermissionListVO> getPermissions(PermissionListDTO permissionListDTO) {
         PageHelper.startPage(permissionListDTO.getPageNum(), permissionListDTO.getPageSize());
-        PageInfo<PermissionListVO> pageInfo = new PageInfo<>(permissionMapper.getPermissions());
+        PageInfo<PermissionListVO> pageInfo = new PageInfo<>(permissionMapper.getPermissions(permissionListDTO));
 
         BaseListVO<PermissionListVO> baseListVO = new BaseListVO<>();
         baseListVO.setTotal(pageInfo.getTotal());

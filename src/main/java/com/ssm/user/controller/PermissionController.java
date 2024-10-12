@@ -25,7 +25,7 @@ public class PermissionController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/permission/add")
-    public Result addRole(@RequestBody Permission permission) {
+    public Result addPermission(@RequestBody Permission permission) {
         int flag = permissionService.addPermission(permission);
         if (flag == 0) {
             Result.error("新增权限失败");
@@ -36,7 +36,7 @@ public class PermissionController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/permission/{permissionId}")
-    public Result deleteRole(@PathVariable int permissionId) {
+    public Result deletePermission(@PathVariable int permissionId) {
         int flag = permissionService.deletePermission(permissionId);
         if (flag == 0) {
             Result.error("删除权限失败");
@@ -47,7 +47,7 @@ public class PermissionController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/permission/update")
-    public Result updateRole(@RequestBody PermissionDTO permissionDTO) {
+    public Result updatePermission(@RequestBody PermissionDTO permissionDTO) {
         int flag = permissionService.updatePermission(permissionDTO);
         if (flag == 0) {
             Result.error("修改权限失败");
@@ -58,7 +58,7 @@ public class PermissionController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/permissions")
-    public Result getRoles(@Valid @RequestBody PermissionListDTO permissionListDTO) {
+    public Result getPermissions(@Valid @RequestBody PermissionListDTO permissionListDTO) {
         return Result.success(permissionService.getPermissions(permissionListDTO), "权限列表查询成功");
     }
     
