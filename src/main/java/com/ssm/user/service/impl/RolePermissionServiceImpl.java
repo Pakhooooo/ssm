@@ -6,9 +6,11 @@ import com.ssm.user.po.RolePermission;
 import com.ssm.user.service.RolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,32 +24,27 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int saveRolePermission(RolePermissionDTO rolePermissionDTO) {
         Integer roleId = rolePermissionDTO.getRoleId();
-        List<Integer> permissionIds = rolePermissionDTO.getPermissionIds();
+        Set<Integer> permissionIds = rolePermissionDTO.getPermissionIds();
         if (permissionIds.isEmpty()) {
             return rolePermissionMapper.deleteRolePermissionByRoleId(roleId);
         }
 
-        List<Integer> originalPermissions = rolePermissionMapper.getPermissionIdsByRoleId(roleId);
-        if (originalPermissions.isEmpty()) {
+        Set<Integer> oldPermissions = rolePermissionMapper.getPermissionIdsByRoleId(roleId);
+        if (oldPermissions.isEmpty()) {
             List<RolePermission> rolePermissions = getRolePermissions(roleId, permissionIds);
             return rolePermissionMapper.insertList(rolePermissions);
         }
 
-        List<Integer> updatePermissionIds = permissionIds.stream()
-                .filter(permissionId -> !originalPermissions.contains(permissionId))
-                .collect(Collectors.toList());
-        
-        if (updatePermissionIds.isEmpty()) {
-            return 1;
-        }
+        rolePermissionMapper.deleteRolePermissionByRoleId(roleId);
 
-        List<RolePermission> rolePermissions = getRolePermissions(roleId, updatePermissionIds);
+        List<RolePermission> rolePermissions = getRolePermissions(roleId, permissionIds);
         return rolePermissionMapper.insertList(rolePermissions);
     }
     
-    private List<RolePermission> getRolePermissions(Integer roleId, List<Integer> permissionIds) {
+    private List<RolePermission> getRolePermissions(Integer roleId, Set<Integer> permissionIds) {
         return permissionIds.stream().map(permissionId -> {
             RolePermission rolePermission = new RolePermission();
             rolePermission.setRoleId(roleId);

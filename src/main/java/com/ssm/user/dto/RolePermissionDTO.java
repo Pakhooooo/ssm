@@ -2,13 +2,13 @@ package com.ssm.user.dto;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class RolePermissionDTO {
     
     private Integer roleId;
     
-    private List<Integer> permissionIds;
+    private Set<Integer> permissionIds;
     
 }

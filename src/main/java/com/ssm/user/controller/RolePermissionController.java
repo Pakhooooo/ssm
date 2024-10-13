@@ -26,9 +26,9 @@ public class RolePermissionController {
     public Result addRole(@RequestBody RolePermissionDTO rolePermissionDTO) {
         int flag = rolePermissionService.saveRolePermission(rolePermissionDTO);
         if (flag == 0) {
-            Result.error("新增角色权限失败");
+            Result.error("保存角色权限失败");
         }
 
-        return Result.success("新增角色权限成功");
+        return Result.success("保存角色权限成功");
     }
 }
