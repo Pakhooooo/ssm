@@ -7,6 +7,7 @@ import com.ssm.user.service.RolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +52,9 @@ public class RolePermissionServiceImpl implements RolePermissionService {
             RolePermission rolePermission = new RolePermission();
             rolePermission.setRoleId(roleId);
             rolePermission.setPermissionId(permissionId);
+            rolePermission.setCreateTime(new Date());
+            rolePermission.setUpdateTime(new Date());
+            rolePermission.setDelStatus(0);
             return rolePermission;
         }).collect(Collectors.toList());
     }
