@@ -2,30 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.user.mapper.RoleMapper">
     
-    <select id="getRoles" resultMap="RoleResultMap">
+    <select id="getRoles" resultType="RoleListVO">
         SELECT
             r.id,
             r.role_code AS roleCode,
-            r.role_name AS roleName,
-            tp.id AS permissionId,
-            tp.permission_name AS permissionName
+            r.role_name AS roleName
         FROM t_role r
-        LEFT JOIN t_role_permission trp ON r.id = trp.role_id
-            AND trp.del_status = 0
-        LEFT JOIN t_permission tp ON trp.permission_id = tp.id
-            AND tp.del_status = 0
         WHERE r.del_status = 0
     </select>
+    
+    <select id="getRolePermissionByRoleId" parameterType="java.lang.Integer" resultType="PermissionVO">
+        SELECT
+            tp.id AS id,
+            tp.permission_name AS label
+        FROM
+            t_role_permission trp
+        JOIN t_permission tp ON
+            trp.permission_id = tp.id
+            AND tp.del_status = 0
+        WHERE
+            trp.del_status = 0
+            AND trp.role_id = #{roleId}
+    </select>
 
-    <resultMap id="RoleResultMap" type="RoleListVO">
-        <id property="id" column="id" />
-        <result property="roleCode" column="roleCode" />
-        <result property="roleName" column="roleName" />
-        
-        <collection property="permissions" ofType="PermissionVO">
-            <id property="id" column="permissionId" />
-            <result property="label" column="permissionName" />
-        </collection>
-    </resultMap>
+<!--    <resultMap id="RoleResultMap" type="RoleListVO">-->
+<!--        <id property="id" column="id" />-->
+<!--        <result property="roleCode" column="roleCode" />-->
+<!--        <result property="roleName" column="roleName" />-->
+<!--        -->
+<!--        <collection property="permissions" ofType="PermissionVO">-->
+<!--            <id property="id" column="permissionId" />-->
+<!--            <result property="label" column="permissionName" />-->
+<!--        </collection>-->
+<!--    </resultMap>-->
     
 </mapper>
