@@ -9,8 +9,19 @@ import java.util.Objects;
 @Data
 public class Result {
 
-    private int code;
+    /**
+     * 返回码
+     */
+    private Integer code;
+
+    /**
+     * 返回消息提醒
+     */
     private String message;
+
+    /**
+     * 返回数据
+     */
     private Object data;
 
     public Result(String message, int code) {

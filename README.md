@@ -71,7 +71,7 @@ src
 │  │  │          │  ├─service
 │  │  │          │  │  └─impl
 │  │  │          │  └─vo
-│  │  │          ├─register            # 注册模块
+│  │  │          ├─register            # 报名模块
 │  │  │          │  ├─controller
 │  │  │          │  ├─dto
 │  │  │          │  ├─mapper
