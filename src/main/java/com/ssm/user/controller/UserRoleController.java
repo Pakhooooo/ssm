@@ -25,10 +25,10 @@ public class UserRoleController {
     public Result addUserRole(@RequestBody UserRole userRole) {
         int flag = userRoleService.addUserRole(userRole);
         if (flag == 0) {
-            Result.error("新增用户角色失败");
+            Result.error("保存用户角色失败");
         }
 
-        return Result.success("新增用户角色成功");
+        return Result.success("保存用户角色成功");
     }
 
     @PreAuthorize("hasRole('ADMIN')")

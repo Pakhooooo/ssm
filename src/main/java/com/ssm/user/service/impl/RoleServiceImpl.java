@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ssm.common.exception.AlreadyExistsException;
 import com.ssm.common.global.BaseListVO;
-import com.ssm.common.util.RedisUtils;
 import com.ssm.user.dto.RoleDTO;
 import com.ssm.user.dto.RoleListDTO;
 import com.ssm.user.mapper.RoleMapper;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 public class RoleServiceImpl implements RoleService {
     
     private RoleMapper roleMapper;
-    private RedisUtils redisUtils;
 
     @Autowired
     public void setRoleMapper(RoleMapper roleMapper) {
@@ -72,8 +70,4 @@ public class RoleServiceImpl implements RoleService {
         return baseListVO;
     }
 
-    @Autowired
-    public void setRedisUtils(RedisUtils redisUtils) {
-        this.redisUtils = redisUtils;
-    }
 }

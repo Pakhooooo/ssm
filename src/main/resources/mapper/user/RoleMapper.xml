@@ -11,7 +11,7 @@
         WHERE r.del_status = 0
     </select>
     
-    <select id="getRolePermissionByRoleId" parameterType="java.lang.Integer" resultType="PermissionVO">
+    <select id="getRolePermissionByRoleId" parameterType="java.lang.Integer" resultType="UserPermissionVO">
         SELECT
             tp.id AS id,
             tp.permission_name AS label
@@ -24,16 +24,5 @@
             trp.del_status = 0
             AND trp.role_id = #{roleId}
     </select>
-
-<!--    <resultMap id="RoleResultMap" type="RoleListVO">-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="roleCode" column="roleCode" />-->
-<!--        <result property="roleName" column="roleName" />-->
-<!--        -->
-<!--        <collection property="permissions" ofType="PermissionVO">-->
-<!--            <id property="id" column="permissionId" />-->
-<!--            <result property="label" column="permissionName" />-->
-<!--        </collection>-->
-<!--    </resultMap>-->
     
 </mapper>

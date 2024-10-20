@@ -23,7 +23,7 @@ public class UserRegisterController {
     }
 
     @PostMapping(value = "/auth/user/register")
-    public Result userRegister(@Valid @RequestBody User user) throws Exception {
+    public Result userRegister(@Valid @RequestBody User user) {
         int flag = userRegisterService.userRegister(user);
         if (flag == 1) {
             return Result.success("用户注册成功");

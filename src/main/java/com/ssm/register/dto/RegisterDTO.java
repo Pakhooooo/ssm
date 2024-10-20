@@ -9,6 +9,6 @@ public class RegisterDTO {
 
     private Integer competitionId;
     
-    private String registerName;
+    private Integer userId;
 
 }

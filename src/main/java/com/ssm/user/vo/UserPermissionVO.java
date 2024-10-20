@@ -3,7 +3,7 @@ package com.ssm.user.vo;
 import lombok.Data;
 
 @Data
-public class PermissionVO {
+public class UserPermissionVO {
     
     private Integer id;
     

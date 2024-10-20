@@ -37,7 +37,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public int addRegister(RegisterDTO registerDTO) {
-        User user = userInfoMapper.getUserByName(registerDTO.getRegisterName());
+        User user = userInfoMapper.getUserById(registerDTO.getUserId());
         if (user == null) {
             throw new RuntimeException("无法获取到该参赛者的信息，请核对后重试");
         }
@@ -45,6 +45,7 @@ public class RegisterServiceImpl implements RegisterService {
         Register queryObject = new Register();
         queryObject.setDelStatus(0);
         queryObject.setUserId(user.getId());
+        queryObject.setCompetitionId(registerDTO.getCompetitionId());
         int count = registerMapper.selectCount(queryObject);
         if (count > 0) {
             throw new RuntimeException("您已报名该比赛，请勿重复操作");

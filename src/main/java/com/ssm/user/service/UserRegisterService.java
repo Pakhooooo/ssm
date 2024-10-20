@@ -4,6 +4,6 @@ import com.ssm.user.po.User;
 
 public interface UserRegisterService {
     
-    int userRegister(User user) throws Exception;
+    int userRegister(User user);
     
 }

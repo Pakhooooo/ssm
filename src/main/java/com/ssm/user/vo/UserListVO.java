@@ -2,6 +2,8 @@ package com.ssm.user.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserListVO {
 
@@ -16,5 +18,7 @@ public class UserListVO {
     private String realName;
 
     private String phone;
+
+    private List<UserRoleVO> roles;
 
 }

@@ -9,4 +9,17 @@
         WHERE ur.del_status = 0
     </select>
     
+    <select id="getUserRoleByUserId" parameterType="java.lang.Integer" resultType="UserRoleVO">
+        SELECT
+            tr.id, tr.role_name AS label
+        FROM
+            t_user_role ur
+        JOIN t_role tr ON
+            ur.role_id = tr.id
+            AND tr.del_status = 0
+        WHERE
+            ur.del_status = 0
+            AND user_id = #{userId}
+    </select>
+    
 </mapper>

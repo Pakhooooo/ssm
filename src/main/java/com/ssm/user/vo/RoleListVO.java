@@ -13,6 +13,6 @@ public class RoleListVO {
     
     private String roleName;
     
-    private List<PermissionVO> permissions;
+    private List<UserPermissionVO> permissions;
 
 }

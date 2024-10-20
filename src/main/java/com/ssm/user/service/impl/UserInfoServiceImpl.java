@@ -6,6 +6,7 @@ import com.ssm.common.global.BaseListVO;
 import com.ssm.user.dto.UserDTO;
 import com.ssm.user.dto.UserListDTO;
 import com.ssm.user.mapper.UserInfoMapper;
+import com.ssm.user.mapper.UserRoleMapper;
 import com.ssm.user.po.User;
 import com.ssm.user.service.UserInfoService;
 import com.ssm.user.vo.UserListVO;
@@ -14,16 +15,21 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     
     private UserInfoMapper userInfoMapper;
+    
+    private UserRoleMapper userRoleMapper;
 
     @Autowired
     public void setUserInfoMapper(UserInfoMapper userInfoMapper) {
         this.userInfoMapper = userInfoMapper;
+    }
+
+    @Autowired
+    public void setUserRoleMapper(UserRoleMapper userRoleMapper) {
+        this.userRoleMapper = userRoleMapper;
     }
 
     @Override
@@ -35,6 +41,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     public BaseListVO<UserListVO> getUserList(UserListDTO userListDTO) {
         PageHelper.startPage(userListDTO.getPageNum(), userListDTO.getPageSize());
         PageInfo<UserListVO> pageInfo = new PageInfo<>(userInfoMapper.getUserList());
+        pageInfo.getList().forEach(userListVO -> userListVO.setRoles(userRoleMapper.getUserRoleByUserId(userListVO.getUserId())));
         
         BaseListVO<UserListVO> baseListVO = new BaseListVO<>();
         baseListVO.setTotal(pageInfo.getTotal());
