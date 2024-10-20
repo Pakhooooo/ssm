@@ -2,35 +2,37 @@ package com.ssm.user.service.impl;
 
 import com.ssm.common.exception.AlreadyExistsException;
 import com.ssm.user.mapper.UserRegisterMapper;
+import com.ssm.user.mapper.UserRoleMapper;
 import com.ssm.user.po.User;
+import com.ssm.user.po.UserRole;
 import com.ssm.user.service.UserRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.regex.Pattern;
 
 @Service
 public class UserRegisterServiceImpl implements UserRegisterService {
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     
-    private UserRegisterMapper userRegisterMapper;
+    private final UserRegisterMapper userRegisterMapper;
+    
+    private final UserRoleMapper userRoleMapper;
 
     @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+    public UserRegisterServiceImpl(PasswordEncoder passwordEncoder, UserRegisterMapper userRegisterMapper, UserRoleMapper userRoleMapper) {
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @Autowired
-    public void setUserRegisterMapper(UserRegisterMapper userRegisterMapper) {
         this.userRegisterMapper = userRegisterMapper;
+        this.userRoleMapper = userRoleMapper;
     }
 
     private static final Pattern PHONE_PATTERN = Pattern.compile("^1[3-9]\\d{9}$");
-    
-    // 正则表达式验证用户名（小写字母，长度限制）
-    private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-z]{3,20}$");
+
+    // 正则表达式验证用户名（小写字母和数字，长度限制）
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-z0-9]{3,20}$");
 
     private static final Pattern REAL_NAME_PATTERN = Pattern.compile("^[\\u4e00-\\u9fa5a-zA-Z]+$");
 
@@ -38,6 +40,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@#$%^&*()_+={}\\[\\]:;\"'<>,.?~`-]{6,20}$");
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int userRegister(User user) {
         if (!USERNAME_PATTERN.matcher(user.getUsername()).matches()) {
             throw new RuntimeException("用户名格式不正确");
@@ -62,9 +65,14 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         if (originalUser != null) {
             throw new AlreadyExistsException("手机号码 " + user.getPhone() + " 已经存在");
         }
-        
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRegisterMapper.insertSelective(user);
+        userRegisterMapper.insertSelective(user);
+
+        UserRole userRole = new UserRole();
+        userRole.setRoleId(2);
+        userRole.setUserId(user.getId());
+        return userRoleMapper.insertSelective(userRole);
     }
 
 }

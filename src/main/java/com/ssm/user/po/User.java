@@ -3,6 +3,7 @@ package com.ssm.user.po;
 import com.ssm.common.global.BasePO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.List;
 public class User extends BasePO {
 
     @Id
+    @KeySql(useGeneratedKeys = true)
     private Integer id;
     
     @NotBlank(message = "用户名不能为空")
