@@ -3,8 +3,9 @@
 <mapper namespace="com.ssm.score.mapper.ScoreMapper">
     
     <select id="getScore" parameterType="java.lang.Integer" resultType="ScoreVO">
-        SELECT 
-            ts.id, tu.real_name AS realName, tc.competition_name AS competitionName, ts.competition_score AS competitionScore, ts.competition_rank AS competitionRank
+        SELECT
+            ts.id, tu.real_name AS realName, tc.competition_name AS competitionName, ts.competition_score AS competitionScore,
+            ts.competition_rank AS competitionRank, ts.score_status AS scoreStatus, tu.id AS userId
         FROM t_competition_score ts
         JOIN t_user tu ON ts.user_id = tu.id AND tu.del_status = 0
         JOIN t_competition tc ON ts.competition_id = tc.id AND tc.del_status = 0
@@ -13,7 +14,8 @@
 
     <select id="getScores" resultType="ScoreListVO">
         SELECT
-            ts.id, tu.real_name AS realName, tc.competition_name AS competitionName, ts.competition_score AS competitionScore, ts.competition_rank AS competitionRank
+            ts.id, tu.real_name AS realName, tc.competition_name AS competitionName, ts.competition_score AS competitionScore,
+            ts.competition_rank AS competitionRank, ts.score_status AS scoreStatus, tu.id AS userId
         FROM t_competition_score ts
         JOIN t_user tu ON ts.user_id = tu.id AND tu.del_status = 0
         JOIN t_competition tc ON ts.competition_id = tc.id AND tc.del_status = 0

@@ -9,6 +9,8 @@ public class ScoreListVO {
 
     private Integer id;
     
+    private Integer userId;
+    
     private String realName;
 
     private String competitionName;
@@ -16,5 +18,7 @@ public class ScoreListVO {
     private BigDecimal competitionScore;
 
     private Integer competitionRank;
+    
+    private String scoreStatus;
     
 }
